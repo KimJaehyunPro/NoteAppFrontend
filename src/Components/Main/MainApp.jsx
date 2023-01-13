@@ -18,7 +18,7 @@ export default function MainApp(props) {
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-      <MainAppBar drawer_width={drawer_width} handleDrawerToggle={handleDrawerToggle} />
+      <MainAppBar drawer_width={drawer_width} />
       <MainDrawer drawer_width={drawer_width} handleDrawerToggle={handleDrawerToggle} mobileOpen={mobileOpen}/>
       <MainContainer drawer_width={drawer_width}/>
     </Box>

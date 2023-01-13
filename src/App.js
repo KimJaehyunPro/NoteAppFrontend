@@ -2,6 +2,7 @@ import { createTheme, ThemeProvider } from '@mui/material';
 import './App.css';
 
 import MainApp from './Components/Main/MainApp';
+import Test from './Components/Main/Test';
 
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
@@ -19,7 +20,8 @@ export default function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <MainApp />
+      {/* <MainApp /> */}
+      <Test/>
     </ThemeProvider>
   );
 }
