@@ -1,6 +1,6 @@
+import * as React from 'react';
 import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
-import * as React from 'react';
 
 import MainAppBar from './MainAppBar';
 import MainDrawer from './MainDrawer';
@@ -8,8 +8,10 @@ import MainContainer from './MainContainer';
 
 export default function MainApp(props) {
 
-  const drawer_width = 240;
+  const drawerWidth = 240;
+  const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  const container = window !== undefined ? () => window().document.body : undefined;
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -18,9 +20,9 @@ export default function MainApp(props) {
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-      <MainAppBar drawer_width={drawer_width} />
-      <MainDrawer drawer_width={drawer_width} handleDrawerToggle={handleDrawerToggle} mobileOpen={mobileOpen}/>
-      <MainContainer drawer_width={drawer_width}/>
+      <MainAppBar drawerWidth={drawerWidth} handleDrawerToggle={handleDrawerToggle}/>
+      <MainDrawer drawerWidth={drawerWidth} mobileOpen={mobileOpen} handleDrawerToggle={handleDrawerToggle} container={container}/>
+      <MainContainer drawerWidth={drawerWidth}/>
     </Box>
   );
 }
