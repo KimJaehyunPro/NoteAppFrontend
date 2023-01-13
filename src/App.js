@@ -1,25 +1,25 @@
-import logo from './logo.svg';
+import { createTheme, ThemeProvider } from '@mui/material';
 import './App.css';
 
-function App() {
+import MainApp from './Components/Main/MainApp';
+
+import '@fontsource/roboto/300.css';
+import '@fontsource/roboto/400.css';
+import '@fontsource/roboto/500.css';
+import '@fontsource/roboto/700.css';
+
+export default function App() {
+  const theme = createTheme({
+    palette: {
+      primary: {
+        main: "#536dfe"
+      }
+    }
+  })
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={theme}>
+      <MainApp />
+    </ThemeProvider>
   );
 }
-
-export default App;
