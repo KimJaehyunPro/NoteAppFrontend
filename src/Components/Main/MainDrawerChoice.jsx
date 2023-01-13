@@ -10,9 +10,10 @@ import CreateIcon from '@mui/icons-material/Create';
 import AnalyticsIcon from '@mui/icons-material/Analytics';
 import InfoIcon from '@mui/icons-material/Info';
 import ListItemIcon from '@mui/material/ListItemIcon';
+import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
 
 export default function MainDrawerChoice(props) {
-    return(
+    return (
         <div>
             <Toolbar />
             <Divider />
@@ -29,7 +30,19 @@ export default function MainDrawerChoice(props) {
             </List>
 
             <List>
-                <ListItem key="Read Note" disablePadding>
+                <ListItem key="ShowAllNotes" disablePadding>
+                    <ListItemButton href="/ShowAllNotes">
+                        <ListItemIcon>
+                            <LibraryBooksIcon />
+                        </ListItemIcon>
+
+                        <ListItemText primary="Show All Notes" />
+                    </ListItemButton>
+                </ListItem>
+            </List>
+
+            <List>
+                <ListItem key="ReadNote" disablePadding>
                     <ListItemButton href="/ReadNote">
                         <ListItemIcon>
                             <ImportContactsIcon />

@@ -2,7 +2,8 @@ import { Container, Box, Toolbar } from "@mui/material";
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import AboutPage from "../About/AboutPage";
-import ReadNote from "../ReadNote/ReadNote";
+import ShowAllNotesPage from "../ShowAllNotes/ShowAllNotesPage";
+import ReadNotePage from "../ReadNote/ReadNotePage";
 import WriteNotePage from "../WriteNote/WriteNotePage";
 import TechPage from "../Tech/TechPage";
 
@@ -16,8 +17,12 @@ export default function MainContainer(props) {
             element: <AboutPage />
         },
         {
+            path: "/ShowAllNotes",
+            element: <ShowAllNotesPage />
+        },
+        {
             path: "/ReadNote",
-            element: <ReadNote />
+            element: <ReadNotePage />
         },
         {
             path: "/WriteNote",
