@@ -2,6 +2,7 @@ import { Container, Box, Toolbar } from "@mui/material";
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import AboutPage from "../About/AboutPage";
+import ReadNote from "../ReadNote/ReadNote";
 import WriteNotePage from "../WriteNote/WriteNotePage";
 import TechPage from "../Tech/TechPage";
 
@@ -11,6 +12,10 @@ export default function MainContainer(props) {
         {
             path: "/",
             element: <AboutPage />
+        },
+        {
+            path: "/ReadNote",
+            element: <ReadNote />
         },
         {
             path: "/WriteNote",
@@ -27,9 +32,9 @@ export default function MainContainer(props) {
     return (
         <Box
             component="main"
-            sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawer_width}px)` }}}
+            sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawer_width}px)` } }}
         >
-            
+
             <Toolbar drawer_width={drawer_width} />
 
             <Container>
