@@ -1,4 +1,4 @@
-import { Paper, Typography } from "@mui/material";
+import { Button, Paper, Typography } from "@mui/material";
 
 export default function Notes(props) {
 
@@ -12,6 +12,7 @@ export default function Notes(props) {
                         <Typography>{note.id}</Typography>
                         <Typography>{note.title}</Typography>
                         <Typography>{note.content}</Typography>
+                        <Button href={`notes/${note.id}`}>View</Button>
                     </Paper>
                 );
             })}

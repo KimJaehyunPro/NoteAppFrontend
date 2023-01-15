@@ -10,7 +10,6 @@ import CreateIcon from '@mui/icons-material/Create';
 import AnalyticsIcon from '@mui/icons-material/Analytics';
 import InfoIcon from '@mui/icons-material/Info';
 import ListItemIcon from '@mui/material/ListItemIcon';
-import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
 
 export default function MainDrawerChoice(props) {
     return (

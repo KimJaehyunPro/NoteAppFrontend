@@ -1,8 +1,6 @@
 import Notes from "./Notes";
 import fetchAllNotes from "./utils/fetchAllNotes";
-
-import { Button } from '@mui/material';
-import * as React from 'react'
+import * as React from 'react';
 
 export default function ShowAllNotesPage(props) {
     
