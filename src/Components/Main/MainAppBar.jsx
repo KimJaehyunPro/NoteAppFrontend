@@ -31,7 +31,7 @@ export default function MainAppBar(props) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            Responsive drawer
+            My Note
           </Typography>
         </Toolbar>
       </AppBar>
