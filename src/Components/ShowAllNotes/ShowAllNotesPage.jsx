@@ -1,10 +1,21 @@
+import Notes from "./Notes";
 import fetchAllNotes from "./utils/fetchAllNotes";
 
+import { Button } from '@mui/material';
+import * as React from 'react'
+
 export default function ShowAllNotesPage(props) {
+    
+    const [notes, setNotes] = React.useState([]);
 
-    fetchAllNotes();
+    React.useEffect(() => {
+        fetchAllNotes(setNotes);
+      }, []);
 
-    return(
-        <div>ShowAllNotesPage</div>
+    return (
+        <div>
+            <p>ShowAllNotesPage</p>
+            <Notes notes={notes} />
+        </div>
     )
 }

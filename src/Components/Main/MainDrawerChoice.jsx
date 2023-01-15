@@ -31,9 +31,9 @@ export default function MainDrawerChoice(props) {
 
             <List>
                 <ListItem key="ShowAllNotes" disablePadding>
-                    <ListItemButton href="/ShowAllNotes">
+                    <ListItemButton href="/notes">
                         <ListItemIcon>
-                            <LibraryBooksIcon />
+                        <ImportContactsIcon />
                         </ListItemIcon>
 
                         <ListItemText primary="Show All Notes" />
@@ -42,19 +42,8 @@ export default function MainDrawerChoice(props) {
             </List>
 
             <List>
-                <ListItem key="ReadNote" disablePadding>
-                    <ListItemButton href="/ReadNote">
-                        <ListItemIcon>
-                            <ImportContactsIcon />
-                        </ListItemIcon>
-                        <ListItemText primary="Read Note" />
-                    </ListItemButton>
-                </ListItem>
-            </List>
-
-            <List>
                 <ListItem key="Write Note" disablePadding>
-                    <ListItemButton href="/WriteNote">
+                    <ListItemButton href="/notes/create">
                         <ListItemIcon>
                             <CreateIcon />
                         </ListItemIcon>
@@ -66,7 +55,7 @@ export default function MainDrawerChoice(props) {
 
             <List>
                 <ListItem key="Tech" disablePadding>
-                    <ListItemButton href="/Tech">
+                    <ListItemButton href="/tech">
                         <ListItemIcon>
                             <AnalyticsIcon />
                         </ListItemIcon>

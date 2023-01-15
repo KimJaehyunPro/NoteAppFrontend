@@ -17,19 +17,19 @@ export default function MainContainer(props) {
             element: <AboutPage />
         },
         {
-            path: "/ShowAllNotes",
+            path: "/notes",
             element: <ShowAllNotesPage />
         },
         {
-            path: "/ReadNote",
-            element: <ReadNotePage />
-        },
-        {
-            path: "/WriteNote",
+            path: "/notes/create",
             element: <WriteNotePage />
         },
         {
-            path: "/Tech",
+            path: "/notes/:noteId",
+            element: <ReadNotePage />
+        },
+        {
+            path: "/tech",
             element: <TechPage />
         }
     ])

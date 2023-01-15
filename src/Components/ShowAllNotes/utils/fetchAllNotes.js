@@ -1,7 +1,9 @@
-export default function fetchAllNotes() {
+export default async function fetchAllNotes(setNotes) {
 
-    fetch(``)
-
-    console.log(process.env.REACT_APP_BACKEND_URL);
-    return;
+    await fetch(`${process.env.REACT_APP_BACKEND_URL}/note/all`)
+    .then(response => response.json())
+    .then(data => {
+        setNotes(data);
+        return;
+    });
 }
