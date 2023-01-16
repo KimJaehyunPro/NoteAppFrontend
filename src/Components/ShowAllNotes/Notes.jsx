@@ -1,3 +1,5 @@
+import sendDeleteNoteRequest from "./utils/sendDeleteNoteRequest";
+
 import { Button, Paper, Typography } from "@mui/material";
 
 export default function Notes(props) {
@@ -13,6 +15,9 @@ export default function Notes(props) {
                         <Typography>{note.title}</Typography>
                         <Typography>{note.content}</Typography>
                         <Button href={`notes/${note.id}`}>View</Button>
+                        <Button onClick={() => {
+                            sendDeleteNoteRequest(note.id);
+                        }}>Delete</Button>
                     </Paper>
                 );
             })}

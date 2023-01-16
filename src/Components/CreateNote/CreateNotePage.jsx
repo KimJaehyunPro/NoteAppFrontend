@@ -1,7 +1,15 @@
+import createNotePutRequest from './utils/createNotePutRequest';
+
 import { Box, Button } from '@mui/material/';
 import TextField from '@mui/material/TextField';
 
+import * as React from 'react';
+
 export default function CreateNotePage(props) {
+
+    const [title, setTitle] = React.useState();
+    const [content, setContent] = React.useState();
+
     return (
         <Box
             component="form"
@@ -16,6 +24,7 @@ export default function CreateNotePage(props) {
                 id='note-title'
                 label="Title"
                 multiline
+                onChange={e => { setTitle(e.target.value) }}
             />
 
             <TextField
@@ -23,9 +32,10 @@ export default function CreateNotePage(props) {
                 label="Content"
                 multiline
                 rows={20}
+                onChange={e => { setContent(e.target.value) }}
             />
 
-            <Button variant="contained">Contained</Button>
+            <Button onClick={() => {createNotePutRequest(title, content);}} variant="contained">Contained</Button>
 
         </Box>
     )
