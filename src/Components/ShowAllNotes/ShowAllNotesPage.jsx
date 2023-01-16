@@ -4,7 +4,7 @@ import * as React from 'react';
 
 export default function ShowAllNotesPage(props) {
     
-    const [notes, setNotes] = React.useState();
+    const [notes, setNotes] = React.useState([]);
 
     React.useEffect(() => {
         fetchAllNotes(setNotes);
@@ -12,7 +12,7 @@ export default function ShowAllNotesPage(props) {
 
     return (
         <div>
-            {notes ? <Notes notes={notes} /> : <p>There is no note.</p>}
+            { notes.length > 0 ? <Notes notes={notes} /> : <p>There is no note.</p> }
         </div>
     )
 }
