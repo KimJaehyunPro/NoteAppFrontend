@@ -12,7 +12,7 @@ export default function ShowAllNotesPage(props) {
 
     return (
         <div>
-            { notes.length > 0 ? <Notes notes={notes} /> : <p>There is no note.</p> }
+            { notes.length > 0 ? <Notes notes={notes} setNotes={setNotes} /> : <p>There is no note.</p> }
         </div>
     )
 }
