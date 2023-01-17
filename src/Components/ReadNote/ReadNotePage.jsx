@@ -1,25 +1,18 @@
 import { Paper } from "@mui/material";
-
-import * as React from 'react';
 import { useParams } from "react-router-dom";
-
-import fetchNote from "./utils/fetchNote";
+import * as React from 'react';
+import useNote from "../../Hooks/useNote";
 
 export default function ReadNotePage(props) {
 
     const { noteId } = useParams();
-    const [noteTitle, setNoteTitle] = React.useState("Default noteTitle");
-    const [noteContent, setNoteContent] = React.useState("Default noteContent");
+    const [id, title, content] = useNote(noteId);
 
-    React.useEffect(() => {
-        fetchNote(noteId, setNoteTitle, setNoteContent);
-    }, []);
-    
     return (
         <Paper elevation={3}>
-            <p>{ noteId }</p>
-            <p>{ noteTitle }</p>
-            <p>{ noteContent }</p>
+            <p>{ id }</p>
+            <p>{ title }</p>
+            <p>{ content }</p>
         </Paper>
     )
 }

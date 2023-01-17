@@ -1,14 +1,14 @@
-import createNotePutRequest from './utils/createNotePutRequest';
-
 import { Box, Button } from '@mui/material/';
 import TextField from '@mui/material/TextField';
-
 import * as React from 'react';
+import useCreateNote from '../../Hooks/useCreateNote';
 
 export default function CreateNotePage(props) {
 
-    const [title, setTitle] = React.useState();
-    const [content, setContent] = React.useState();
+    const [title, setTitle] = React.useState('');
+    const [content, setContent] = React.useState('');
+
+    const createNote = useCreateNote();
 
     return (
         <Box
@@ -18,7 +18,7 @@ export default function CreateNotePage(props) {
             }}
             noValidate
             autoComplete="off"
-        >
+        >   
 
             <TextField
                 id='note-title'
@@ -35,8 +35,7 @@ export default function CreateNotePage(props) {
                 onChange={e => { setContent(e.target.value) }}
             />
 
-            <Button onClick={() => {createNotePutRequest(title, content);}} variant="contained">Contained</Button>
-
+            <Button onClick={() => { createNote(title, content) }} variant="contained">Contained</Button>
         </Box>
     )
 }

@@ -13,13 +13,16 @@ export default function deleteNoteRequest(noteId, setNotes) {
     })
         .then(response => response.json())
         .then(data => {
-            setNotes(notes => {
-                const newNotes = notes.filter(note => {
-                    return note.id != noteId;
+            if (data.noteId) {
+                setNotes(notes => {
+                    const newNotes = notes.filter(note => {
+                        return note.noteId !== noteId;
+                    })
+                    return newNotes;
                 })
-
-                return newNotes;
-            })
+            } else {
+                alert("I am broke like you");
+            }
         })
 
     return noteId;
