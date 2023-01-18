@@ -1,3 +1,5 @@
+import useRandomNote from "../../Hooks/useRandomNote.js"
+
 import Divider from '@mui/material/Divider';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
@@ -12,12 +14,15 @@ import InfoIcon from '@mui/icons-material/Info';
 import ListItemIcon from '@mui/material/ListItemIcon';
 
 export default function MainDrawerChoice(props) {
+
+    const randomNote = useRandomNote;
+
     return (
         <div>
             <Toolbar />
             <Divider />
             <List>
-                <ListItem key="About" disablePadding>
+                <ListItem key="About">
                     <ListItemButton href="/">
                         <ListItemIcon>
                             <InfoIcon />
@@ -29,10 +34,10 @@ export default function MainDrawerChoice(props) {
             </List>
 
             <List>
-                <ListItem key="ShowAllNotes" disablePadding>
+                <ListItem key="ShowAllNotes">
                     <ListItemButton href="/notes">
                         <ListItemIcon>
-                        <ImportContactsIcon />
+                            <ImportContactsIcon />
                         </ListItemIcon>
 
                         <ListItemText primary="Show All Notes" />
@@ -41,7 +46,7 @@ export default function MainDrawerChoice(props) {
             </List>
 
             <List>
-                <ListItem key="Write Note" disablePadding>
+                <ListItem key="Write Note">
                     <ListItemButton href="/notes/create">
                         <ListItemIcon>
                             <CreateIcon />
@@ -53,13 +58,25 @@ export default function MainDrawerChoice(props) {
             </List>
 
             <List>
-                <ListItem key="Tech" disablePadding>
+                <ListItem key="Tech">
                     <ListItemButton href="/tech">
                         <ListItemIcon>
                             <AnalyticsIcon />
                         </ListItemIcon>
 
                         <ListItemText primary="Tech" />
+                    </ListItemButton>
+                </ListItem>
+            </List>
+
+            <List>
+                <ListItem key="Random" onClick={() => {randomNote();}}>
+                    <ListItemButton>
+                        <ListItemIcon>
+                            <AnalyticsIcon />
+                        </ListItemIcon>
+
+                        <ListItemText primary="Random Page" />
                     </ListItemButton>
                 </ListItem>
             </List>
