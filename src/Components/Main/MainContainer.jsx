@@ -6,6 +6,7 @@ import ShowAllNotesPage from "../ShowAllNotes/ShowAllNotesPage";
 import ReadNotePage from "../ReadNote/ReadNotePage";
 import CreateNotePage from "../CreateNote/CreateNotePage";
 import TechPage from "../Tech/TechPage";
+import RandomNote from "../ReadNote/RandomNote";
 
 export default function MainContainer(props) {
 
@@ -29,6 +30,10 @@ export default function MainContainer(props) {
         {
             path: "/tech",
             element: <TechPage />
+        },
+        {
+            path: "/random",
+            element: <RandomNote />
         }
     ])
 

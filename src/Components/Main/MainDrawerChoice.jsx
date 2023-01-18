@@ -1,5 +1,3 @@
-import RandomNote from '../ReadNote/RandomNote';
-
 import Divider from '@mui/material/Divider';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
@@ -68,8 +66,8 @@ export default function MainDrawerChoice(props) {
             </List>
 
             <List>
-                <ListItem key="Random" onClick={() => { RandomNote() }}>
-                    <ListItemButton>
+                <ListItem key="Random" >
+                    <ListItemButton href="/random">
                         <ListItemIcon>
                             <AnalyticsIcon />
                         </ListItemIcon>

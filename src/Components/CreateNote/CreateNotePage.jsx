@@ -1,7 +1,8 @@
+import useCreateNote from '../../Hooks/useCreateNote';
+
 import { Box, Button } from '@mui/material/';
 import TextField from '@mui/material/TextField';
 import * as React from 'react';
-import useCreateNote from '../../Hooks/useCreateNote';
 
 export default function CreateNotePage(props) {
 
@@ -35,7 +36,7 @@ export default function CreateNotePage(props) {
                 onChange={e => { setContent(e.target.value) }}
             />
 
-            <Button onClick={() => { createNote(title, content) }} variant="contained">Contained</Button>
+            <Button onClick={() => { createNote(title, content) }} variant="contained">Write</Button>
         </Box>
     )
 }
