@@ -1,4 +1,4 @@
-import useRandomNote from "../../Hooks/useRandomNote.js"
+import RandomNote from '../ReadNote/RandomNote';
 
 import Divider from '@mui/material/Divider';
 import List from '@mui/material/List';
@@ -14,8 +14,6 @@ import InfoIcon from '@mui/icons-material/Info';
 import ListItemIcon from '@mui/material/ListItemIcon';
 
 export default function MainDrawerChoice(props) {
-
-    const randomNote = useRandomNote;
 
     return (
         <div>
@@ -70,7 +68,7 @@ export default function MainDrawerChoice(props) {
             </List>
 
             <List>
-                <ListItem key="Random" onClick={() => {randomNote();}}>
+                <ListItem key="Random" onClick={() => { RandomNote() }}>
                     <ListItemButton>
                         <ListItemIcon>
                             <AnalyticsIcon />
