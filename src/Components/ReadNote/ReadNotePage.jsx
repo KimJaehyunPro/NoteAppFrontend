@@ -4,7 +4,6 @@ import * as React from 'react';
 import useNote from "../../Hooks/useNote";
 
 export default function ReadNotePage(props) {
-
     const { noteId } = useParams();
     const [id, title, content] = useNote(noteId);
 

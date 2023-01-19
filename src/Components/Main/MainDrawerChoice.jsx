@@ -13,42 +13,12 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 
 import * as React from 'react';
 import { useNavigate } from 'react-router-dom';
-import useRandomNoteId from '../../Hooks/useRandomNoteId';
 
 import { GET_RANDOM_NOTE_ID_API_RUL } from '../../Constants/endpoints';
 
-function fetchRandomNoteId() {
-    return fetch(`${process.env.REACT_APP_BACKEND_URL}/${GET_RANDOM_NOTE_ID_API_RUL}`)
-        .then(response => response.json())
-        .then((data) => {
-            return data.noteId;
-    })
-}
-
 export default function MainDrawerChoice(props) {
 
-    const [randomNoteMenuClicked, setRandomNoteMenuClicked] = React.useState(false);
     const navigate = useNavigate();
-
-    React.useEffect(() => {
-        if (randomNoteMenuClicked) {
-            fetchRandomNoteId().then(noteId => {
-                navigate(noteId)
-            })
-        }
-    }, [randomNoteMenuClicked])
-
-
-    // useRandomNoteId().then((noteIdData) => {
-    //     setNoteId(noteIdData);
-    // })
-    
-    // React.useEffect(() => {
-    //     if (noteId) {
-    //         navigate(`../notes/${noteId}`);
-    //     }
-    // }, [noteId, navigate])
-
 
     return (
         <div>
@@ -94,9 +64,12 @@ export default function MainDrawerChoice(props) {
                 <ListItem key="Random" >
                     <ListItemButton onClick={() => {
                         // Okay, if you clicked this, make a request to Random API
-                        setRandomNoteMenuClicked(true);
-                        // Get the randomNoteId
-                        // And Navigate there.
+                        fetch(`${process.env.REACT_APP_BACKEND_URL}/${GET_RANDOM_NOTE_ID_API_RUL}`)
+                            .then(response => response.json())
+                            .then((data) => {
+                                // Get the randomNoteId
+                                navigate(`notes/${data.noteId}`);
+                            })
                     }}>
                         <ListItemIcon>
                             <AnalyticsIcon />

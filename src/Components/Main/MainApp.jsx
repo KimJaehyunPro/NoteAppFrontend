@@ -11,8 +11,6 @@ import RandomNote from '../ReadNote/RandomNote';
 export default function MainApp(props) {
 
   const router = createBrowserRouter([
-
-
     {
       path: "/",
       element: <Layout />,
@@ -39,11 +37,9 @@ export default function MainApp(props) {
         }
       ]
     }
-
   ])
 
   return (
-
     <RouterProvider router={router} />
   );
 } 

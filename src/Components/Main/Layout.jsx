@@ -18,7 +18,6 @@ export default function Layout(props) {
     };
 
     return (
-
         <Box sx={{ display: 'flex' }}>
             <CssBaseline />
             <MainAppBar drawerWidth={drawerWidth} handleDrawerToggle={handleDrawerToggle} />
@@ -29,11 +28,9 @@ export default function Layout(props) {
                     sx={{ flexGrow: 1, p: 3, width: { sm: "95%" } }}
                 >
                     <Toolbar />
-
                     <Outlet />
                 </Box>
             </Container>
         </Box>
-
     )
 }
