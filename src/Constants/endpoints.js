@@ -4,3 +4,4 @@ export const READ_NOTE_API_URL = "note";
 export const READ_ALL_NOTES_API_URL = "note/all";
 export const DELETE_NOTE_API_URL = "note/delete";
 export const GET_RANDOM_NOTE_ID_API_RUL = "note/randomNoteId";
+export const GET_NOTE_BY_TITLE_URL = "note/GetNoteByTitle";

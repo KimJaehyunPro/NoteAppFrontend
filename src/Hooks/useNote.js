@@ -4,7 +4,7 @@ import { READ_NOTE_API_URL } from '../Constants/endpoints';
 
 export default function useNote(noteId) {
     const [noteTitle, setNoteTitle] = React.useState("Loading noteTitle...");
-    const [noteContent, setNoteContent] = React.useState("Content...");
+    const [noteContent, setNoteContent] = React.useState("Loading Content...");
     const [noteTags, setNoteTags] = React.useState([]);
 
     React.useEffect(() => {

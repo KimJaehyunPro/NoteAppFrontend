@@ -6,17 +6,17 @@ import WriteNote from "./WriteNote";
 export default function UpdateNotePage(props) {
 
     const { noteId }  = useParams();
-    const [defaultNoteId, defaultTitle, defaultContent, defaultTagNames] = useNote(noteId);
+    const [defaultNoteId, defaultTitle, defaultContent, defaultTags] = useNote(noteId);
 
     const updateNote = useUpdateNote();
 
     //returns a note object(id, title, content, tags)
     
-    return(
+    return (
         <WriteNote 
         defaultTitle={defaultTitle} 
         defaultContent={defaultContent} 
-        defaultTagNames={defaultTagNames} 
+        defaultTags={defaultTags} 
         operation={updateNote}
         buttonLabel="Update"/>
     )

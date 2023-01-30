@@ -8,11 +8,26 @@ function parseTags(tags) {
 
 export default function WriteNote(props) {
 
-    const {defaultTitle, defaultContent, defaultTagNames, operation, buttonLabel} = props;
+    const {defaultTitle, defaultContent, defaultTags, operation, buttonLabel} = props;
 
     const [title, setTitle] = React.useState('');
     const [content, setContent] = React.useState('');
     const [tagNames, setTagNames] = React.useState(''); 
+
+    React.useEffect(() => {
+        setTitle(defaultTitle);
+        setContent(defaultContent);
+    }, [defaultTitle, defaultContent])
+
+    React.useEffect(() => {
+        const cleansedDefaultTagNames = [];
+
+        defaultTags.forEach((tag) => {
+            cleansedDefaultTagNames.push(tag.tagName);
+        })
+
+        setTagNames(cleansedDefaultTagNames)
+    }, [defaultTags])
     
     function handleSubmit(title, content, tags) {
         const parsedTags = parseTags(tags);
@@ -33,7 +48,7 @@ export default function WriteNote(props) {
                 id='note-title'
                 label="Title"
                 multiline
-                defaultValue={defaultTitle}
+                value={title}
                 onChange={e => {
                     setTitle(e.target.value)
                 }}
@@ -44,7 +59,7 @@ export default function WriteNote(props) {
                 label="Content"
                 multiline
                 rows={20}
-                defaultValue={defaultContent}
+                value={content}
                 onChange={e => {
                     setContent(e.target.value)
                 }}
@@ -54,7 +69,7 @@ export default function WriteNote(props) {
                 label="Tags"
                 placeholder='#Tag1 #Tag2'
                 size="small"
-                defaultValue={defaultTagNames}
+                value={tagNames}
                 onChange={e => {
                     setTagNames(e.target.value)
                 }}
