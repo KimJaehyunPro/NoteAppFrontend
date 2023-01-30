@@ -2,12 +2,12 @@ import * as React from 'react';
 
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Layout from './Layout';
-import AboutPage from '../About/AboutPage';
-import ShowAllNotesPage from '../ShowAllNotes/ShowAllNotesPage';
-import CreateNotePage from '../WriteNote/CreateNotePage';
-import ReadNotePage from '../ReadNote/ReadNotePage';
-import RandomNote from '../ReadNote/RandomNote';
-import UpdateNotePage from '../WriteNote/UpdateNotePage';
+import AboutPage from '../../Pages/About/AboutPage';
+import CreateNotePage from '../../Pages/CreateNote/CreateNotePage';
+import ReadNoteListPage from '../../Pages/ReadNoteList/ReadNoteListPage';
+import ReadNotePage from '../../Pages/ReadNote/ReadNotePage';
+import ReadRandomNotePage from '../../Pages/ReadRandomNote/RandomNotePage';
+import UpdateNotePage from '../../Pages/UpdateNote/UpdateNotePage';
 
 export default function MainApp(props) {
 
@@ -22,7 +22,7 @@ export default function MainApp(props) {
         },
         {
           path: "/note",
-          element: <ShowAllNotesPage />
+          element: <ReadNoteListPage />
         },
         {
           path: "/note/:noteId",
@@ -38,7 +38,7 @@ export default function MainApp(props) {
         },
         {
           path: "/note/random",
-          element: <RandomNote />
+          element: <ReadRandomNotePage />
         }
       ]
     }

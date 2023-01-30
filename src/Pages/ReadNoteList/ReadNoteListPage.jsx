@@ -1,8 +1,8 @@
-import Notes from "./Notes";
+import Notes from './Notes';
 import fetchAllNotes from "./utils/fetchAllNotes";
 import * as React from 'react';
 
-export default function ShowAllNotesPage(props) {
+export default function ReadNoteListPage(props) {
     
     const [notes, setNotes] = React.useState([]);
 

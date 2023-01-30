@@ -1,31 +1,21 @@
-import parseTags from './utils/parseTags';
-import tagsToHashtaggedString from './utils/tagsToHashtaggedString';
+import parseTags from '../Utils/parseTags';
 
 import { Box, Button } from '@mui/material/';
 import TextField from '@mui/material/TextField';
 import * as React from 'react';
 
-export default function WriteNote(props) {
+export default function NoteForm(props) {
 
     const { noteId, defaultTitle, defaultContent, defaultTags, operation, buttonLabel } = props;
 
-    const [title, setTitle] = React.useState('');
-    const [content, setContent] = React.useState('');
-    const [tagNames, setTagNames] = React.useState('');
-
-    React.useEffect(() => {
-        setTitle(defaultTitle);
-        setContent(defaultContent);
-    }, [defaultTitle, defaultContent])
-
-    // Cleanse tags to a String (ex: [*tag1, *tag2] -> "#tag1 #tag2")
-    React.useEffect(() => {
-        setTagNames(tagsToHashtaggedString(defaultTags));
-    }, [defaultTags])
+    const [title, setTitle] = React.useState(defaultTitle);
+    const [content, setContent] = React.useState(defaultContent);
+    const [tagNames, setTagNames] = React.useState(
+        defaultTags ? defaultTags.map((tag) => `#${tag.tagName}`).join(' ') : []
+    );
 
     function handleSubmit(noteId, title, content, tags) {
-        const parsedTags = parseTags(tags);
-        operation(noteId, title, content, parsedTags);
+        operation(noteId, title, content, parseTags(tags));
     }
 
     return (
@@ -37,7 +27,6 @@ export default function WriteNote(props) {
             noValidate
             autoComplete="off"
         >
-
             <TextField
                 id='note-title'
                 label="Title"
@@ -47,7 +36,6 @@ export default function WriteNote(props) {
                     setTitle(e.target.value)
                 }}
             />
-
             <TextField
                 id='note-content'
                 label="Content"

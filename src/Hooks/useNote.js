@@ -3,9 +3,10 @@ import * as React from 'react';
 import { READ_NOTE_API_URL } from '../Constants/endpoints';
 
 export default function useNote(noteId) {
-    const [noteTitle, setNoteTitle] = React.useState("Loading noteTitle...");
-    const [noteContent, setNoteContent] = React.useState("Loading Content...");
+    const [noteTitle, setNoteTitle] = React.useState("");
+    const [noteContent, setNoteContent] = React.useState("");
     const [noteTags, setNoteTags] = React.useState([]);
+    const [isLoading, setIsLoading] = React.useState(true);
 
     React.useEffect(() => {
         fetch(`${process.env.REACT_APP_BACKEND_URL}/${READ_NOTE_API_URL}/${noteId}`)
@@ -14,8 +15,9 @@ export default function useNote(noteId) {
                 setNoteTitle(noteData.title);
                 setNoteContent(noteData.content);
                 setNoteTags(noteData.tags);
+                setIsLoading(false);
             })
     }, [noteId]);
 
-    return [noteId, noteTitle, noteContent, noteTags];
+    return [noteTitle, noteContent, noteTags, isLoading];
 }

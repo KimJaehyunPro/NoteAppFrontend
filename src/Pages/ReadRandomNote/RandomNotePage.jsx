@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useNavigate } from 'react-router-dom';
 import useRandomNoteId from '../../Hooks/useRandomNoteId';
 
-export default function RandomNote() {
+export default function ReadRandomNotePage() {
 
     const [noteId, setNoteId] = React.useState();
     const navigate = useNavigate();
