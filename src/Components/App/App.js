@@ -1,7 +1,7 @@
 import { createTheme, ThemeProvider } from '@mui/material';
 import './App.css';
 
-import MainApp from './Components/Main/MainApp';
+import MainApp from './MainApp';
 
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
