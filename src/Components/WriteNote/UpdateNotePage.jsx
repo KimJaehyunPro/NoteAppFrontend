@@ -14,6 +14,7 @@ export default function UpdateNotePage(props) {
     
     return (
         <WriteNote 
+        noteId={defaultNoteId}
         defaultTitle={defaultTitle} 
         defaultContent={defaultContent} 
         defaultTags={defaultTags} 

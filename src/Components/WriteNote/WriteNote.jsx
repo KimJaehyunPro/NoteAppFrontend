@@ -1,4 +1,5 @@
 import parseTags from './utils/parseTags';
+import tagsToHashtaggedString from './utils/tagsToHashtaggedString';
 
 import { Box, Button } from '@mui/material/';
 import TextField from '@mui/material/TextField';
@@ -6,7 +7,7 @@ import * as React from 'react';
 
 export default function WriteNote(props) {
 
-    const { defaultTitle, defaultContent, defaultTags, operation, buttonLabel } = props;
+    const { noteId, defaultTitle, defaultContent, defaultTags, operation, buttonLabel } = props;
 
     const [title, setTitle] = React.useState('');
     const [content, setContent] = React.useState('');
@@ -17,15 +18,14 @@ export default function WriteNote(props) {
         setContent(defaultContent);
     }, [defaultTitle, defaultContent])
 
-    // Cleanse tags to a String 
-    // (ex: [*tag2, *tag2] -> "#foo #bar")
+    // Cleanse tags to a String (ex: [*tag1, *tag2] -> "#tag1 #tag2")
     React.useEffect(() => {
         setTagNames(tagsToHashtaggedString(defaultTags));
     }, [defaultTags])
 
-    function handleSubmit(title, content, tags) {
+    function handleSubmit(noteId, title, content, tags) {
         const parsedTags = parseTags(tags);
-        operation(title, content, parsedTags);
+        operation(noteId, title, content, parsedTags);
     }
 
     return (
@@ -70,7 +70,7 @@ export default function WriteNote(props) {
             />
 
             <Button onClick={() => {
-                handleSubmit(title, content, tagNames)
+                handleSubmit(noteId, title, content, tagNames);
             }} variant="contained">{buttonLabel}</Button>
         </Box>
     );

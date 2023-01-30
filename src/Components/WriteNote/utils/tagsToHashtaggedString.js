@@ -1,5 +1,7 @@
 export default function tagsToHashtaggedString(tags) {
 
+    //tags = [{"id": 0, "tagName": "foo"}, {"id": 1, "tagName": "bar"}]
+
     const originalTagNamesList = [];
 
     tags.forEach((tag) => {
