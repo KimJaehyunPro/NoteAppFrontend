@@ -19,14 +19,26 @@ export default function WriteNote(props) {
         setContent(defaultContent);
     }, [defaultTitle, defaultContent])
 
+    // Cleanse tags to a String 
+    // (ex: [{id: 0, tagName: "foo"}, {id: 1, tagName: "bar"}}] -> "#foo #bar")
     React.useEffect(() => {
-        const cleansedDefaultTagNames = [];
+        const originalTagNamesList = [];
 
         defaultTags.forEach((tag) => {
-            cleansedDefaultTagNames.push(tag.tagName);
+            originalTagNamesList.push(tag.tagName);
         })
+        // originalTagNamesList = ["foo","bar"]
 
-        setTagNames(cleansedDefaultTagNames)
+        const hashtaggedTagNamesList =  originalTagNamesList.map(tagName => {
+            return "#" + tagName
+        })
+        //hashtaggedTagNamesList = ["#foo", "#bar"]
+
+        const cleansedTagNamesString = hashtaggedTagNamesList.join(' ');
+        console.log(cleansedTagNamesString);
+        //cleansedTagNamesString = "#foo #bar"
+
+        setTagNames(cleansedTagNamesString)
     }, [defaultTags])
     
     function handleSubmit(title, content, tags) {
