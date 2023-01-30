@@ -1,31 +1,8 @@
+import parseTags from './utils/parseTags';
+
 import { Box, Button } from '@mui/material/';
 import TextField from '@mui/material/TextField';
 import * as React from 'react';
-
-function parseTags(tags) {
-    return tags.split(' ').filter(tag => tag[0] === '#').map(tag => tag.slice(1));
-}
-
-function tagsToHashtaggedString(tags) {
-
-    const originalTagNamesList = [];
-
-    tags.forEach((tag) => {
-        originalTagNamesList.push(tag.tagName);
-    })
-    // originalTagNamesList = ["foo","bar"]
-
-    const hashtaggedTagNamesList = originalTagNamesList.map(tagName => {
-        return "#" + tagName
-    })
-    //hashtaggedTagNamesList = ["#foo", "#bar"]
-
-    const hashtaggedString = hashtaggedTagNamesList.join(' ');
-    console.log(hashtaggedString);
-    //hashtaggedString = "#foo #bar"
-
-    return hashtaggedString;
-}
 
 export default function WriteNote(props) {
 
@@ -41,7 +18,7 @@ export default function WriteNote(props) {
     }, [defaultTitle, defaultContent])
 
     // Cleanse tags to a String 
-    // (ex: [{id: 0, tagName: "foo"}, {id: 1, tagName: "bar"}}] -> "#foo #bar")
+    // (ex: [*tag2, *tag2] -> "#foo #bar")
     React.useEffect(() => {
         setTagNames(tagsToHashtaggedString(defaultTags));
     }, [defaultTags])
