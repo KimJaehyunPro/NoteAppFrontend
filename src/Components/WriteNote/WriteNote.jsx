@@ -1,4 +1,4 @@
-import {Box, Button} from '@mui/material/';
+import { Box, Button } from '@mui/material/';
 import TextField from '@mui/material/TextField';
 import * as React from 'react';
 
@@ -6,13 +6,34 @@ function parseTags(tags) {
     return tags.split(' ').filter(tag => tag[0] === '#').map(tag => tag.slice(1));
 }
 
+function tagsToHashtaggedString(tags) {
+
+    const originalTagNamesList = [];
+
+    tags.forEach((tag) => {
+        originalTagNamesList.push(tag.tagName);
+    })
+    // originalTagNamesList = ["foo","bar"]
+
+    const hashtaggedTagNamesList = originalTagNamesList.map(tagName => {
+        return "#" + tagName
+    })
+    //hashtaggedTagNamesList = ["#foo", "#bar"]
+
+    const hashtaggedString = hashtaggedTagNamesList.join(' ');
+    console.log(hashtaggedString);
+    //hashtaggedString = "#foo #bar"
+
+    return hashtaggedString;
+}
+
 export default function WriteNote(props) {
 
-    const {defaultTitle, defaultContent, defaultTags, operation, buttonLabel} = props;
+    const { defaultTitle, defaultContent, defaultTags, operation, buttonLabel } = props;
 
     const [title, setTitle] = React.useState('');
     const [content, setContent] = React.useState('');
-    const [tagNames, setTagNames] = React.useState(''); 
+    const [tagNames, setTagNames] = React.useState('');
 
     React.useEffect(() => {
         setTitle(defaultTitle);
@@ -22,25 +43,9 @@ export default function WriteNote(props) {
     // Cleanse tags to a String 
     // (ex: [{id: 0, tagName: "foo"}, {id: 1, tagName: "bar"}}] -> "#foo #bar")
     React.useEffect(() => {
-        const originalTagNamesList = [];
-
-        defaultTags.forEach((tag) => {
-            originalTagNamesList.push(tag.tagName);
-        })
-        // originalTagNamesList = ["foo","bar"]
-
-        const hashtaggedTagNamesList =  originalTagNamesList.map(tagName => {
-            return "#" + tagName
-        })
-        //hashtaggedTagNamesList = ["#foo", "#bar"]
-
-        const cleansedTagNamesString = hashtaggedTagNamesList.join(' ');
-        console.log(cleansedTagNamesString);
-        //cleansedTagNamesString = "#foo #bar"
-
-        setTagNames(cleansedTagNamesString)
+        setTagNames(tagsToHashtaggedString(defaultTags));
     }, [defaultTags])
-    
+
     function handleSubmit(title, content, tags) {
         const parsedTags = parseTags(tags);
         operation(title, content, parsedTags);
@@ -50,7 +55,7 @@ export default function WriteNote(props) {
         <Box
             component="form"
             sx={{
-                '& .MuiTextField-root': {m: 1, width: '100%'},
+                '& .MuiTextField-root': { m: 1, width: '100%' },
             }}
             noValidate
             autoComplete="off"
