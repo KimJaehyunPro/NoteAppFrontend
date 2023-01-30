@@ -16,10 +16,10 @@ export default function Notes(props) {
                         <Typography>{note.content}</Typography>
                         <Stack direction="row" spacing={1}>
                             {note.tags.map((tag) =>
-                                <Chip label={tag.tagName}/>
+                                <Chip key={tag.id} label={tag.tagName}/>
                             )}
                         </Stack>
-                        <Button href={`notes/${note.noteId}`}>View</Button>
+                        <Button href={`note/${note.noteId}`}>View</Button>
                         <Button onClick={() => {
                             deleteNoteRequest(note.noteId, setNotes);
                         }}>Delete</Button>

@@ -8,6 +8,6 @@ export default function CreateNotePage(props) {
     const createNote = useCreateNote();
 
     return (
-            <WriteNote operation={createNote} />
+            <WriteNote operation={createNote} buttonLabel="Create" />
     )
 }

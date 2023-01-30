@@ -19,7 +19,7 @@ export default function useCreateNote() {
         })
         .then(response => response.json())
         .then(() => {
-            navigate("../notes");
+            navigate("../note");
         })
     };
 }

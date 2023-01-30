@@ -21,23 +21,23 @@ export default function MainApp(props) {
           element: <AboutPage />
         },
         {
-          path: "/notes",
+          path: "/note",
           element: <ShowAllNotesPage />
         },
         {
-          path: "/notes/create",
-          element: <CreateNotePage />
-        },
-        {
-          path: "/notes/update/:noteId",
-          element: <UpdateNotePage />
-        },
-        {
-          path: "/notes/:noteId",
+          path: "/note/:noteId",
           element: <ReadNotePage />
         },
         {
-          path: "/notes/random",
+          path: "/note/create",
+          element: <CreateNotePage />
+        },
+        {
+          path: "/note/update/:noteId",
+          element: <UpdateNotePage/>
+        },
+        {
+          path: "/note/random",
           element: <RandomNote />
         }
       ]

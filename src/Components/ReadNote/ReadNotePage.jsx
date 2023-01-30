@@ -7,14 +7,14 @@ import EditIcon from '@mui/icons-material/Edit';
 
 export default function ReadNotePage(props) {
     const { noteId } = useParams();
-    const [id, title, content] = useNote(noteId);
+    const [id, title, content, tags] = useNote(noteId);
 
     return (
         <Paper elevation={3}>
             <p>{id}</p>
             <p>{title}</p>
             <p>{content}</p>
-            <Fab color="secondary" aria-label="update" href={`/notes/update/${id}`}>
+            <Fab color="secondary" aria-label="update" href={`/note/update/${id}`}>
                 <EditIcon />
             </Fab>
         </Paper>

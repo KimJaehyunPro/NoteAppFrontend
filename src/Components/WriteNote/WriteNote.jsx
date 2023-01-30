@@ -8,9 +8,7 @@ function parseTags(tags) {
 
 export default function WriteNote(props) {
 
-    const {defaultTitle, defaultContent, defaultTagNames} = props;
-
-    const operation = props.operation;
+    const {defaultTitle, defaultContent, defaultTagNames, operation, buttonLabel} = props;
 
     const [title, setTitle] = React.useState('');
     const [content, setContent] = React.useState('');
@@ -64,7 +62,7 @@ export default function WriteNote(props) {
 
             <Button onClick={() => {
                 handleSubmit(title, content, tagNames)
-            }} variant="contained">Create</Button>
+            }} variant="contained">{buttonLabel}</Button>
         </Box>
     );
 }

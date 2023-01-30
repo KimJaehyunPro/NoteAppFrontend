@@ -13,7 +13,7 @@ export default function RandomNote() {
     
     React.useEffect(() => {
         if (noteId) {
-            navigate(`../notes/${noteId}`);
+            navigate(`../note/${noteId}`);
         }
     }, [noteId, navigate])
 
