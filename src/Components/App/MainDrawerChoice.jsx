@@ -8,7 +8,6 @@ import Toolbar from '@mui/material/Toolbar';
 import ImportContactsIcon from '@mui/icons-material/ImportContacts';
 import CreateIcon from '@mui/icons-material/Create';
 import AnalyticsIcon from '@mui/icons-material/Analytics';
-import InfoIcon from '@mui/icons-material/Info';
 import ListItemIcon from '@mui/material/ListItemIcon';
 
 import * as React from 'react';
@@ -24,17 +23,6 @@ export default function MainDrawerChoice(props) {
         <div>
             <Toolbar />
             <Divider />
-            <List>
-                <ListItem key="About">
-                    <ListItemButton href="/">
-                        <ListItemIcon>
-                            <InfoIcon />
-                        </ListItemIcon>
-
-                        <ListItemText primary="About" />
-                    </ListItemButton>
-                </ListItem>
-            </List>
 
             <List>
                 <ListItem key="ShowAllNotes">

@@ -2,7 +2,6 @@ import * as React from 'react';
 
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Layout from './Layout';
-import AboutPage from '../../Pages/About/AboutPage';
 import CreateNotePage from '../../Pages/CreateNote/CreateNotePage';
 import ReadNoteListPage from '../../Pages/ReadNoteList/ReadNoteListPage';
 import ReadNotePage from '../../Pages/ReadNote/ReadNotePage';
@@ -16,10 +15,6 @@ export default function MainApp(props) {
       path: "/",
       element: <Layout />,
       children: [
-        {
-          path: "/",
-          element: <AboutPage />
-        },
         {
           path: "/note",
           element: <ReadNoteListPage />
