@@ -1,18 +1,14 @@
 import Notes from './Notes';
-import fetchAllNotes from "./utils/fetchAllNotes";
+import useNoteList from './utils/useNoteList';
 import * as React from 'react';
 
 export default function ReadNoteListPage(props) {
-    
-    const [notes, setNotes] = React.useState([]);
 
-    React.useEffect(() => {
-        fetchAllNotes(setNotes);
-      }, []);
+    const [noteList, setNoteList] = useNoteList();
 
     return (
         <div>
-            { notes.length > 0 ? <Notes notes={notes} setNotes={setNotes} /> : <p>There is no note.</p> }
+            {noteList.length > 0 ? <Notes noteList={noteList} setNoteList={setNoteList} /> : <p>There is no note.</p>}
         </div>
     )
 }

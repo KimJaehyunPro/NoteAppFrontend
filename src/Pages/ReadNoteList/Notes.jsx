@@ -4,11 +4,11 @@ import { Button, Chip, Paper, Stack, Typography } from "@mui/material";
 
 export default function Notes(props) {
 
-    const { notes, setNotes } = props;
+    const { noteList, setNotes } = props;
 
     return (
         <div>
-            {notes.map((note) => {
+            {noteList.map((note) => {
                 return (
                     <Paper elevation={2} key={note.noteId} style={{ "margin": "10px" }}>
                         <Typography>{note.noteId}</Typography>

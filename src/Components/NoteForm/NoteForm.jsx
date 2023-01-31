@@ -1,4 +1,4 @@
-import parseTags from '../Utils/parseTags';
+import parseTags from '../../Utils/parseTags';
 
 import { Box, Button } from '@mui/material/';
 import TextField from '@mui/material/TextField';

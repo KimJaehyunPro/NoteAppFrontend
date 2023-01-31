@@ -1,5 +1,5 @@
 import useCreateNote from '../../Hooks/useCreateNote';
-import WriteNote from "../../Components/NoteForm";
+import WriteNote from "../../Components/NoteForm/NoteForm";
 
 import * as React from 'react';
 
