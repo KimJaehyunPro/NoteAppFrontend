@@ -5,6 +5,7 @@ import { Button, Chip, Paper, Stack, Typography } from "@mui/material";
 export default function Notes(props) {
 
     const { noteList, setNotes } = props;
+    const maxContentCharacterLength = 100;
 
     return (
         <div>
@@ -13,7 +14,10 @@ export default function Notes(props) {
                     <Paper elevation={2} key={note.noteId} style={{ "margin": "10px" }}>
                         <Typography>{note.noteId}</Typography>
                         <Typography>{note.title}</Typography>
-                        <Typography>{note.content}</Typography>
+                        <Typography>{
+                        ((note.content.length > maxContentCharacterLength) ? 
+                        `${note.content.slice(0, maxContentCharacterLength)} ...` : note.content)
+                        }</Typography>
                         <Stack direction="row" spacing={1}>
                             {note.tags.map((tag) =>
                                 <Chip key={tag.id} label={tag.tagName}/>
