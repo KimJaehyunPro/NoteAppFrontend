@@ -1,24 +1,38 @@
-import { Paper, Fab, Typography } from "@mui/material";
+import { Paper, Typography, Button, Stack } from "@mui/material";
 import { useParams } from "react-router-dom";
 import * as React from 'react';
 import useNote from "../../Hooks/useNote";
 
-import EditIcon from '@mui/icons-material/Edit';
+import useDeleteNoteRequest from "../../Hooks/useDeleteNoteRequest";
+
+import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
+import BorderColorRoundedIcon from '@mui/icons-material/BorderColorRounded';
 
 export default function ReadNotePage(props) {
     const { noteId } = useParams();
     const [title, content] = useNote(noteId);
 
+    const deleteNoteRequest = useDeleteNoteRequest();
+
+    const buttonStyle = {
+        "border-radius": "20px"
+    }
+
     return (
         <Paper elevation={3}>
-            <Typography>{noteId}</Typography>
-            <br/>
-            <Typography>{title}</Typography>
-            <br/>
-            <Typography style={{whiteSpace: 'pre-line'}}>{content}</Typography>
-            <Fab color="secondary" aria-label="update" href={`/note/update/${noteId}`}>
-                <EditIcon />
-            </Fab>
+            <Stack spacing={2}>
+                <Typography>{noteId}</Typography>
+                <Typography>{title}</Typography>
+                <Typography style={{ whiteSpace: 'pre-line' }}>{content}</Typography>
+
+                <Stack direction="row" justifyContent="flex-end">
+                    <Button style={buttonStyle} color="secondary" variant="outlined" href={`/note/update/${noteId}`} startIcon={<BorderColorRoundedIcon />}>Edit</Button>
+                    <Button style={buttonStyle} color="error" variant="outlined" startIcon={<DeleteRoundedIcon />} onClick={() => {
+                        deleteNoteRequest({noteId});
+                    }}>Delete</Button>
+                </Stack>
+
+            </Stack>
         </Paper>
     )
 }

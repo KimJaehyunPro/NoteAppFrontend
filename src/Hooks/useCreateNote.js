@@ -5,7 +5,7 @@ export default function useCreateNote() {
 
     const navigate = useNavigate();
     
-    return (noteId, title, content, tagNames) => {
+    return (title, content, tagNames) => {
         fetch(`${process.env.REACT_APP_BACKEND_URL}/${CREATE_NOTE_API_URL}`, {
             method: 'POST',
             headers: { "Content-type": "application/json" },
