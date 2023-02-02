@@ -4,7 +4,7 @@ import { Button, Chip, Paper, Stack, Typography } from "@mui/material";
 
 export default function Notes(props) {
 
-    const { noteList, setNotes } = props;
+    const { noteList, setNoteList } = props;
     const maxContentCharacterLength = 100;
 
     return (
@@ -25,7 +25,7 @@ export default function Notes(props) {
                         </Stack>
                         <Button href={`note/${note.noteId}`}>View</Button>
                         <Button onClick={() => {
-                            deleteNoteRequest(note.noteId, setNotes);
+                            deleteNoteRequest(note.noteId, setNoteList);
                         }}>Delete</Button>
                     </Paper>
                 );

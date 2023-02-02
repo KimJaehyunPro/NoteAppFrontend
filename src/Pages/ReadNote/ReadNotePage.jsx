@@ -7,7 +7,7 @@ import EditIcon from '@mui/icons-material/Edit';
 
 export default function ReadNotePage(props) {
     const { noteId } = useParams();
-    const [title, content, tags, isLoading] = useNote(noteId);
+    const [title, content] = useNote(noteId);
 
     return (
         <Paper elevation={3}>

@@ -1,6 +1,6 @@
 import { DELETE_NOTE_API_URL } from "../../../Constants/endpoints";
 
-export default function deleteNoteRequest(noteId, setNotes) {
+export default function deleteNoteRequest(noteId, setNoteList) {
 
     fetch(`${process.env.REACT_APP_BACKEND_URL}/${DELETE_NOTE_API_URL}`, {
         method: 'POST',
@@ -14,11 +14,11 @@ export default function deleteNoteRequest(noteId, setNotes) {
         .then(response => response.json())
         .then(data => {
             if (data.noteId) {
-                setNotes(notes => {
-                    const newNotes = notes.filter(note => {
+                setNoteList(noteList => {
+                    const newNoteList = noteList.filter(note => {
                         return note.noteId !== noteId;
                     })
-                    return newNotes;
+                    return newNoteList;
                 })
             } else {
                 alert("I am broke like you");
