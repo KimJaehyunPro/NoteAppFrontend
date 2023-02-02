@@ -28,7 +28,7 @@ export default function ReadNotePage(props) {
                 <Stack direction="row" justifyContent="flex-end">
                     <Button style={buttonStyle} color="secondary" variant="outlined" href={`/note/update/${noteId}`} startIcon={<BorderColorRoundedIcon />}>Edit</Button>
                     <Button style={buttonStyle} color="error" variant="outlined" startIcon={<DeleteRoundedIcon />} onClick={() => {
-                        deleteNoteRequest({noteId});
+                        deleteNoteRequest(noteId);
                     }}>Delete</Button>
                 </Stack>
 

@@ -18,7 +18,6 @@ export default function useDeleteNoteRequest() {
             .then(response => response.json())
             .then(data => {
                 if (data.noteId) {
-                    alert("Deleted!");
                     navigate("../note");
                 } else {
                     alert("I am broke like you");
