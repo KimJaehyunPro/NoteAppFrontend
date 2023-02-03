@@ -15,7 +15,7 @@ export default function ReadNotePage(props) {
     const deleteNoteRequest = useDeleteNoteRequest();
 
     const buttonStyle = {
-        "border-radius": "20px"
+        "borderRadius": "20px"
     }
 
     return (
