@@ -4,6 +4,10 @@ import { Box, Button } from '@mui/material/';
 import TextField from '@mui/material/TextField';
 import * as React from 'react';
 
+function tagNamesToTagObjects(tagNames) {
+    return tagNames.map((tagName) => {return { name: tagName }});
+}
+
 export default function NoteForm(props) {
 
     const { noteId, defaultTitle, defaultContent, defaultTags, operation, buttonLabel } = props;
@@ -14,8 +18,9 @@ export default function NoteForm(props) {
         defaultTags ? defaultTags.map((tag) => `#${tag.tagName}`).join(' ') : []
     );
 
-    function handleSubmit(noteId, title, content, tags) {
-        operation(noteId, title, content, parseTags(tags));
+    function handleSubmit(noteId, title, content, tagNames) {
+        const tags = tagNamesToTagObjects(parseTags(tagNames));
+        operation(noteId, title, content, tags);
     }
 
     return (
