@@ -26,7 +26,7 @@ export default function MainDrawerChoice(props) {
 
             <List>
                 <ListItem key="ShowAllNotes">
-                    <ListItemButton href="/note">
+                    <ListItemButton href="/notes">
                         <ListItemIcon>
                             <ImportContactsIcon />
                         </ListItemIcon>
@@ -38,7 +38,7 @@ export default function MainDrawerChoice(props) {
 
             <List>
                 <ListItem key="Write Note">
-                    <ListItemButton href="/note/create">
+                    <ListItemButton href="/notes/create">
                         <ListItemIcon>
                             <CreateIcon />
                         </ListItemIcon>
@@ -56,7 +56,7 @@ export default function MainDrawerChoice(props) {
                             .then(response => response.json())
                             .then((data) => {
                                 // Get the randomNoteId
-                                navigate(`note/${data.noteId}`);
+                                navigate(`notes/${data.noteId}`);
                             })
                     }}>
                         <ListItemIcon>

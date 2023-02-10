@@ -1,12 +1,12 @@
 import { useNavigate } from "react-router-dom";
-import { DELETE_NOTE_API_URL } from "../Constants/endpoints";
+import { NOTE_API_URL } from "../Constants/endpoints";
 
 export default function useDeleteNoteRequest() {
 
     const navigate = useNavigate();
 
     return ((noteId) => {
-        fetch(`${process.env.REACT_APP_BACKEND_URL}/${DELETE_NOTE_API_URL}`, {
+        fetch(`${process.env.REACT_APP_BACKEND_URL}/${NOTE_API_URL}/`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
