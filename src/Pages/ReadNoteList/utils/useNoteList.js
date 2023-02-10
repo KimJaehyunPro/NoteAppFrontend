@@ -8,7 +8,7 @@ export default function useNoteList() {
         fetch(`${process.env.REACT_APP_BACKEND_URL}/${NOTE_API_URL}/`)
             .then(response => response.json())
             .then(data => {
-                setNoteList(data);
+                setNoteList(data.content);
             });
     }, [])
 

@@ -30,7 +30,7 @@ export default function Notes(props) {
                             }</Typography>
                             <Stack direction="row" spacing={1}>
                                 {note.tags.map((tag) =>
-                                    <Chip key={tag.id} label={tag.tagName} />
+                                    <Chip key={tag.id} label={tag.name} />
                                 )}
                             </Stack>
 
