@@ -15,7 +15,7 @@ export default function NoteForm(props) {
     const [title, setTitle] = React.useState(defaultTitle);
     const [content, setContent] = React.useState(defaultContent);
     const [tagNames, setTagNames] = React.useState(
-        defaultTags ? defaultTags.map((tag) => `#${tag.tagName}`).join(' ') : []
+        defaultTags ? defaultTags.map((tag) => `#${tag.name}`).join(' ') : []
     );
 
     function handleSubmit(noteId, title, content, tagNames) {

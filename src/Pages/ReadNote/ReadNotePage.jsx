@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 import * as React from 'react';
 import useNote from "../../Hooks/useNote";
 
+import { UPDATE_NOTE_URL } from "../../Constants/endpoints";
+
 import useDeleteNoteRequest from "../../Hooks/useDeleteNoteRequest";
 
 import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
@@ -26,7 +28,7 @@ export default function ReadNotePage(props) {
                 <Typography style={{ whiteSpace: 'pre-line' }}>{content}</Typography>
 
                 <Stack direction="row" justifyContent="flex-end">
-                    <Button style={buttonStyle} color="secondary" variant="outlined" href={`/note/update/${noteId}`} startIcon={<BorderColorRoundedIcon />}>Edit</Button>
+                    <Button style={buttonStyle} color="secondary" variant="outlined" href={`../${UPDATE_NOTE_URL}/${noteId}`} startIcon={<BorderColorRoundedIcon />}>Edit</Button>
                     <Button style={buttonStyle} color="error" variant="outlined" startIcon={<DeleteRoundedIcon />} onClick={() => {
                         deleteNoteRequest(noteId);
                     }}>Delete</Button>
