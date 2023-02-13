@@ -8,7 +8,7 @@ import BorderColorRoundedIcon from '@mui/icons-material/BorderColorRounded';
 
 export default function Notes(props) {
 
-    const { noteList } = props;
+    const { noteList, setNoteList } = props;
     const maxContentCharacterLength = 100;
 
     const deleteNoteRequest = useDeleteNoteRequest();
@@ -21,9 +21,9 @@ export default function Notes(props) {
         <div>
             {noteList.map((note) => {
                 return (
-                    <Paper elevation={2} key={note.noteId} sx={{ margin: 2, padding: 3 }}>
+                    <Paper elevation={2} key={note.id} sx={{ margin: 2, padding: 3 }}>
                         <Stack spacing={1}>
-                            <Typography variant="caption">{note.noteId}</Typography>
+                            <Typography variant="caption">{note.id}</Typography>
                             <Typography variant="h6">{note.title}</Typography>
                             <Typography>{
                                 ((note.content.length > maxContentCharacterLength) ?
@@ -39,7 +39,10 @@ export default function Notes(props) {
                                 <Button style={buttonStyle} color="success" variant="outlined" href={`${NOTE_API_URL}/${note.id}`} startIcon={<AutoStoriesRoundedIcon/>}>View</Button>
                                 <Button style={buttonStyle} color="secondary" variant="outlined" href={`${UPDATE_NOTE_URL}/${note.id}`} startIcon={<BorderColorRoundedIcon/>}>Edit</Button>
                                 <Button style={buttonStyle} color="error" variant="outlined" startIcon={<DeleteRoundedIcon/>}  onClick={() => {
-                                    deleteNoteRequest(note.id);
+                                    deleteNoteRequest(note.id, () => {
+                                        const noteListWithoutDeletedNote = noteList.filter(n => n.id !== note.id);
+                                        setNoteList(noteListWithoutDeletedNote)
+                                    });
                                 }}>Delete</Button>
                             </Stack>
                         </Stack>
