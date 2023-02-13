@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { NOTE_API_URL } from '../../Constants/endpoints';
+import { NOTE_URL, NOTE_API_URL, CREATE_NOTE_URL, UPDATE_NOTE_URL } from '../../Constants/endpoints';
 
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Layout from './Layout';
@@ -17,19 +17,19 @@ export default function MainApp(props) {
       element: <Layout />,
       children: [
         {
-          path: "/notes",
+          path: `/${NOTE_URL}`,
           element: <ReadNoteListPage />
         },
         {
-          path: `${NOTE_API_URL}/:noteId`,
+          path: `${NOTE_URL}/:noteId`,
           element: <ReadNotePage />
         },
         {
-          path: `${NOTE_API_URL}/create`,
+          path: `${CREATE_NOTE_URL}`,
           element: <CreateNotePage />
         },
         {
-          path: `${NOTE_API_URL}/update/:noteId`,
+          path: `${UPDATE_NOTE_URL}/:noteId`,
           element: <UpdateNotePage/>
         },
         {

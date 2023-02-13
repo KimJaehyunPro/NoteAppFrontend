@@ -1,4 +1,5 @@
 import useDeleteNoteRequest from "../../Hooks/useDeleteNoteRequest";
+import { NOTE_API_URL, UPDATE_NOTE_URL } from "../../Constants/endpoints";
 
 import { Button, Chip, Paper, Stack, Typography } from "@mui/material";
 import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
@@ -35,10 +36,10 @@ export default function Notes(props) {
                             </Stack>
 
                             <Stack direction="row" justifyContent="flex-end" spacing={2}>
-                                <Button style={buttonStyle} color="success" variant="outlined" href={`note/${note.noteId}`} startIcon={<AutoStoriesRoundedIcon/>}>View</Button>
-                                <Button style={buttonStyle} color="secondary" variant="outlined" href={`/note/update/${note.noteId}`} startIcon={<BorderColorRoundedIcon/>}>Edit</Button>
+                                <Button style={buttonStyle} color="success" variant="outlined" href={`${NOTE_API_URL}/${note.id}`} startIcon={<AutoStoriesRoundedIcon/>}>View</Button>
+                                <Button style={buttonStyle} color="secondary" variant="outlined" href={`${UPDATE_NOTE_URL}/${note.id}`} startIcon={<BorderColorRoundedIcon/>}>Edit</Button>
                                 <Button style={buttonStyle} color="error" variant="outlined" startIcon={<DeleteRoundedIcon/>}  onClick={() => {
-                                    deleteNoteRequest(note.noteId);
+                                    deleteNoteRequest(note.id);
                                 }}>Delete</Button>
                             </Stack>
                         </Stack>
