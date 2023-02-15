@@ -6,7 +6,6 @@ import Layout from './Layout';
 import CreateNotePage from '../../Pages/CreateNote/CreateNotePage';
 import ReadNoteListPage from '../../Pages/ReadNoteList/ReadNoteListPage';
 import ReadNotePage from '../../Pages/ReadNote/ReadNotePage';
-import ReadRandomNotePage from '../../Pages/ReadRandomNote/RandomNotePage';
 import UpdateNotePage from '../../Pages/UpdateNote/UpdateNotePage';
 
 export default function MainApp(props) {
@@ -31,10 +30,6 @@ export default function MainApp(props) {
         {
           path: `${UPDATE_NOTE_URL}/:noteId`,
           element: <UpdateNotePage/>
-        },
-        {
-          path: `${NOTE_API_URL}/random`,
-          element: <ReadRandomNotePage />
         }
       ]
     }

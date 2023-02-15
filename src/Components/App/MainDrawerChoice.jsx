@@ -13,11 +13,14 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import * as React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { GET_RANDOM_NOTE_ID_API_RUL } from '../../Constants/endpoints';
+import useRandomId from '../../Hooks/useRandomId';
+
+import { NOTE_URL } from '../../Constants/endpoints';
 
 export default function MainDrawerChoice(props) {
 
     const navigate = useNavigate();
+    const randomId = useRandomId();
 
     return (
         <div>
@@ -51,13 +54,9 @@ export default function MainDrawerChoice(props) {
             <List>
                 <ListItem key="Random" >
                     <ListItemButton onClick={() => {
-                        // Okay, if you clicked this, make a request to Random API
-                        fetch(`${process.env.REACT_APP_BACKEND_URL}/${GET_RANDOM_NOTE_ID_API_RUL}`)
-                            .then(response => response.json())
-                            .then((data) => {
-                                // Get the randomNoteId
-                                navigate(`notes/${data.noteId}`);
-                            })
+                        randomId().then(randomId => {
+                            navigate(`${NOTE_URL}/${randomId}`);
+                        })
                     }}>
                         <ListItemIcon>
                             <AnalyticsIcon />
