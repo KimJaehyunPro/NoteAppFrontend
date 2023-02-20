@@ -1,10 +1,10 @@
 import Notes from './Notes';
 import useNoteList from './utils/useNoteList';
 
-import { NOTE_API_URL } from '../../Constants/endpoints';
+import {NOTE_API_URL} from '../../Constants/endpoints';
 
-import { Typography } from '@mui/material';
-import React, { useState, useEffect } from 'react';
+import {Typography} from '@mui/material';
+import React, {useState, useEffect} from 'react';
 
 const EmptyNotes = () => {
     return <Typography>No notes found.</Typography>
@@ -19,10 +19,7 @@ export default function ReadNoteListPage(props) {
         fetch(`${process.env.REACT_APP_BACKEND_URL}/${NOTE_API_URL}/?page=${page}&size=5&sort=id,desc`)
             .then(response => response.json())
             .then(data => {
-                console.log(page);
                 const notes = data.content;
-                console.log(notes);
-                console.log(notes[0]);
 
                 setNoteList(prevNotes => {
                     const finalNotes = prevNotes;
@@ -51,10 +48,12 @@ export default function ReadNoteListPage(props) {
     useEffect(() => {
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
-        }, [page]);
+    }, [page]);
 
     return (
-        noteList.length > 0 ? <Notes noteList={noteList} setNoteList={setNoteList} /> : <EmptyNotes />
+            <div>
+                {noteList.length > 0 ? <Notes noteList={noteList} setNoteList={setNoteList}/> : <EmptyNotes/>}
+            </div>
     );
 
     // const [noteList, setNoteList] = useNoteList();

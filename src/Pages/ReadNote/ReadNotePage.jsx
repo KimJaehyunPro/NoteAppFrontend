@@ -1,6 +1,7 @@
 import { Paper, Typography, Button, Stack } from "@mui/material";
 import { useParams } from "react-router-dom";
 import * as React from 'react';
+import ReactMarkdown from 'react-markdown';
 import useNote from "../../Hooks/useNote";
 
 import { UPDATE_NOTE_URL } from "../../Constants/endpoints";
@@ -25,7 +26,7 @@ export default function ReadNotePage(props) {
             <Stack spacing={2}>
                 <Typography>{noteId}</Typography>
                 <Typography>{title}</Typography>
-                <Typography style={{ whiteSpace: 'pre-line' }}>{content}</Typography>
+                <ReactMarkdown>{content}</ReactMarkdown>
 
                 <Stack direction="row" justifyContent="flex-end">
                     <Button style={buttonStyle} color="secondary" variant="outlined" href={`../${UPDATE_NOTE_URL}/${noteId}`} startIcon={<BorderColorRoundedIcon />}>Edit</Button>
