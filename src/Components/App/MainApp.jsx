@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { NOTE_URL, NOTE_API_URL, CREATE_NOTE_URL, UPDATE_NOTE_URL } from '../../Constants/endpoints';
+import { NOTE_URL, CREATE_NOTE_URL, UPDATE_NOTE_URL } from '../../Constants/endpoints';
 
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Layout from './Layout';

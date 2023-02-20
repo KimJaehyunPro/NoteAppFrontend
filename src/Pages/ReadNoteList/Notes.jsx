@@ -1,7 +1,7 @@
 import useDeleteNoteRequest from "../../Hooks/useDeleteNoteRequest";
-import {NOTE_API_URL, UPDATE_NOTE_URL} from "../../Constants/endpoints";
+import { NOTE_API_URL, UPDATE_NOTE_URL } from "../../Constants/endpoints";
 
-import {Button, Chip, Paper, Stack, Typography} from "@mui/material";
+import { Button, Chip, Paper, Stack, Typography } from "@mui/material";
 import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
 import AutoStoriesRoundedIcon from '@mui/icons-material/AutoStoriesRounded';
 import BorderColorRoundedIcon from '@mui/icons-material/BorderColorRounded';
@@ -21,18 +21,18 @@ const NoteBodySection = (props) => {
 }
 
 const TagSection = (props) => {
-    const {tags} = props;
+    const { tags } = props;
     return (
         <Stack direction="row" spacing={1}>
             {tags.map((tag) =>
-                <Chip key={tag.id} label={tag.name}/>
+                <Chip key={tag.id} color="primary" sx={{fontSize: "0.875em", fontWeight: "bold"}} label={tag.name} />
             )}
         </Stack>
     )
 }
 
 const ActionButtonSection = (props) => {
-    const {noteList, noteId, setNoteList} = props;
+    const { noteList, noteId, setNoteList } = props;
     const deleteNoteRequest = useDeleteNoteRequest();
     const buttonStyle = {
         "borderRadius": "20px"
@@ -41,31 +41,31 @@ const ActionButtonSection = (props) => {
     return (
         <Stack direction="row" justifyContent="flex-end" spacing={2}>
             <Button style={buttonStyle} color="success" variant="outlined" href={`${NOTE_API_URL}/${noteId}`}
-                    startIcon={<AutoStoriesRoundedIcon/>}>View</Button>
+                startIcon={<AutoStoriesRoundedIcon />}>View</Button>
             <Button style={buttonStyle} color="secondary" variant="outlined" href={`${UPDATE_NOTE_URL}/${noteId}`}
-                    startIcon={<BorderColorRoundedIcon/>}>Edit</Button>
-            <Button style={buttonStyle} color="error" variant="outlined" startIcon={<DeleteRoundedIcon/>}
-                    onClick={() => {
-                        deleteNoteRequest(noteId, () => {
-                            const noteListWithoutDeletedNote = noteList.filter(n => n.id !== noteId);
-                            setNoteList(noteListWithoutDeletedNote)
-                        });
-                    }}>Delete</Button>
+                startIcon={<BorderColorRoundedIcon />}>Edit</Button>
+            <Button style={buttonStyle} color="error" variant="outlined" startIcon={<DeleteRoundedIcon />}
+                onClick={() => {
+                    deleteNoteRequest(noteId, () => {
+                        const noteListWithoutDeletedNote = noteList.filter(n => n.id !== noteId);
+                        setNoteList(noteListWithoutDeletedNote)
+                    });
+                }}>Delete</Button>
         </Stack>
     )
 }
 
 export default function Notes(props) {
-    const {noteList, setNoteList} = props;
+    const { noteList, setNoteList } = props;
     return (
         <div>
             {noteList.map((note) => {
                 return (
-                    <Paper elevation={2} key={note.id} sx={{margin: 2, padding: 3}}>
+                    <Paper elevation={2} key={note.id} sx={{ margin: 2, padding: 3, border: 3, borderColor: "#1976d2"}}>
                         <Stack spacing={1}>
-                            <NoteBodySection title={note.title} content={note.content}/>
-                            <TagSection tags={note.tags}/>
-                            <ActionButtonSection noteList={noteList} noteId={note.id} setNoteList={setNoteList}/>
+                            <NoteBodySection title={note.title} content={note.content} />
+                            <TagSection tags={note.tags} />
+                            <ActionButtonSection noteList={noteList} noteId={note.id} setNoteList={setNoteList} />
                         </Stack>
                     </Paper>
                 );
