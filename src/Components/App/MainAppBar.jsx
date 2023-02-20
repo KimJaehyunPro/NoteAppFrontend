@@ -20,7 +20,7 @@ export default function MainAppBar(props) {
           ml: { sm: `${drawerWidth}px` },
         }}
       >
-        <Toolbar>
+        <Toolbar sx={{alignSelf: "center"}}>
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -30,7 +30,7 @@ export default function MainAppBar(props) {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap component="div">
+          <Typography variant="h5" noWrap component="div" sx={{fontWeight: "bold"}}>
             My Note
           </Typography>
         </Toolbar>
