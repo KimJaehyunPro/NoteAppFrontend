@@ -22,19 +22,22 @@ export default function ReadNotePage(props) {
     }
 
     return (
-        <Paper elevation={3}>
-            <Stack spacing={2}>
-                <Typography>{noteId}</Typography>
-                <Typography>{title}</Typography>
-                <ReactMarkdown>{content}</ReactMarkdown>
+        <Paper elevation={3} sx={{ border: 1, padding: 4 }}>
+            <Stack spacing={3}>
+                <Typography variant="h3">{title}</Typography>
 
-                <Stack direction="row" justifyContent="flex-end">
-                    <Button style={buttonStyle} color="secondary" variant="outlined" href={`../${UPDATE_NOTE_URL}/${noteId}`} startIcon={<BorderColorRoundedIcon />}>Edit</Button>
-                    <Button style={buttonStyle} color="error" variant="outlined" startIcon={<DeleteRoundedIcon />} onClick={() => {
-                        deleteNoteRequest(noteId);
-                    }}>Delete</Button>
+                <Stack spacing={3}>
+
+                    <ReactMarkdown>{content}</ReactMarkdown>
+
+                    <Stack direction="row" justifyContent="flex-end" spacing={1}>
+                        <Button style={buttonStyle} color="secondary" variant="outlined" href={`../${UPDATE_NOTE_URL}/${noteId}`} startIcon={<BorderColorRoundedIcon />}>Edit</Button>
+                        <Button style={buttonStyle} color="error" variant="outlined" startIcon={<DeleteRoundedIcon />} onClick={() => {
+                            deleteNoteRequest(noteId);
+                        }}>Delete</Button>
+                    </Stack>
+
                 </Stack>
-
             </Stack>
         </Paper>
     )

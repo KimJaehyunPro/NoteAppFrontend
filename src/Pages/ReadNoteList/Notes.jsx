@@ -7,11 +7,10 @@ import AutoStoriesRoundedIcon from '@mui/icons-material/AutoStoriesRounded';
 import BorderColorRoundedIcon from '@mui/icons-material/BorderColorRounded';
 
 const NoteBodySection = (props) => {
-    const {id, title, content} = props
+    const { title, content } = props
     const maxContentCharacterLength = 100;
     return (
         <>
-            <Typography variant="caption">{id}</Typography>
             <Typography variant="h6">{title}</Typography>
             <Typography>{
                 ((content.length > maxContentCharacterLength) ?
@@ -64,7 +63,7 @@ export default function Notes(props) {
                 return (
                     <Paper elevation={2} key={note.id} sx={{margin: 2, padding: 3}}>
                         <Stack spacing={1}>
-                            <NoteBodySection id={note.id} title={note.title} content={note.content}/>
+                            <NoteBodySection title={note.title} content={note.content}/>
                             <TagSection tags={note.tags}/>
                             <ActionButtonSection noteList={noteList} noteId={note.id} setNoteList={setNoteList}/>
                         </Stack>
