@@ -3,7 +3,7 @@ import useNoteList from './utils/useNoteList';
 
 import {NOTE_API_URL} from '../../Constants/endpoints';
 
-import {Typography} from '@mui/material';
+import { Typography, Box } from '@mui/material';
 import React, {useState, useEffect} from 'react';
 
 const EmptyNotes = () => {
@@ -35,6 +35,7 @@ export default function ReadNoteListPage(props) {
                 } else {
                     // If there is no note, DO NOT listen to 'scroll' event anymore, since there's no note to get anyway.
                     window.removeEventListener('scroll', handleScroll);
+                    document.getElementById(`no-more-notes`).style.display = "flex";
                 }
             })
     };
@@ -53,6 +54,7 @@ export default function ReadNoteListPage(props) {
     return (
             <div>
                 {noteList.length > 0 ? <Notes noteList={noteList} setNoteList={setNoteList}/> : <EmptyNotes/>}
+                <Box id="no-more-notes" sx={{display: "none"}}>There is no more notes.</Box>
             </div>
     );
 
