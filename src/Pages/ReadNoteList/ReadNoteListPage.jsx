@@ -32,11 +32,12 @@ export default function ReadNoteListPage(props) {
                     return finalNotes;
                 })
 
-                // If there is no note, DO NOT listen to 'scroll' event anymore, since there's no note to get anyway.
-                if (notes.length === 0) {
-                    window.removeEventListener('scroll', handleScroll);
-                } else {
+                // If there is note, add 1 to the page
+                if (notes.length > 0) {
                     setPage(prevPage => prevPage + 1);
+                } else {
+                    // If there is no note, DO NOT listen to 'scroll' event anymore, since there's no note to get anyway.
+                    window.removeEventListener('scroll', handleScroll);
                 }
             })
     };
