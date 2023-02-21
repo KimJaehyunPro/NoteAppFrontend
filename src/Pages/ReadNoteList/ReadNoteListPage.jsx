@@ -1,10 +1,10 @@
 import Notes from './Notes';
 import useNoteList from './utils/useNoteList';
 
-import {NOTE_API_URL} from '../../Constants/endpoints';
+import { NOTE_API_URL } from '../../Constants/endpoints';
 
 import { Typography, Box } from '@mui/material';
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 
 const EmptyNotes = () => {
     return <Typography>No notes found.</Typography>
@@ -13,35 +13,31 @@ const EmptyNotes = () => {
 export default function ReadNoteListPage(props) {
 
     const [noteList, setNoteList] = useNoteList();
+    const [isNotesAllLoaded, setIsNotesAllLoaded] = useState(false);
     const [page, setPage] = useState(1);
 
     const fetchMoreData = () => {
+        console.log("fetMoreData is executed.");
         fetch(`${process.env.REACT_APP_BACKEND_URL}/${NOTE_API_URL}/?page=${page}&size=5&sort=id,desc`)
             .then(response => response.json())
             .then(data => {
                 const notes = data.content;
-
-                setNoteList(prevNotes => {
-                    const finalNotes = prevNotes;
-                    notes.forEach((note) => {
-                        finalNotes.push(note);
-                    })
-                    return finalNotes;
-                })
+                setNoteList(prevNotes => prevNotes.concat(notes));
 
                 // If there is note, add 1 to the page
                 if (notes.length > 0) {
                     setPage(prevPage => prevPage + 1);
                 } else {
                     // If there is no note, DO NOT listen to 'scroll' event anymore, since there's no note to get anyway.
-                    window.removeEventListener('scroll', handleScroll);
-                    document.getElementById(`no-more-notes`).style.display = "flex";
+                    setIsNotesAllLoaded(true);
                 }
             })
     };
 
     const handleScroll = () => {
-        if (window.innerHeight + document.documentElement.scrollTop === document.documentElement.offsetHeight) {
+        if (window.innerHeight + document.documentElement.scrollTop >= document.documentElement.offsetHeight) {
+            console.log("You hit the rock bottom!");
+            window.removeEventListener('scroll', handleScroll);
             fetchMoreData();
         }
     };
@@ -52,10 +48,10 @@ export default function ReadNoteListPage(props) {
     }, [page]);
 
     return (
-            <div>
-                {noteList.length > 0 ? <Notes noteList={noteList} setNoteList={setNoteList}/> : <EmptyNotes/>}
-                <Box id="no-more-notes" sx={{display: "none"}}>There is no more notes.</Box>
-            </div>
+        <div>
+            {noteList.length > 0 ? <Notes noteList={noteList} setNoteList={setNoteList} /> : <EmptyNotes />}
+            {isNotesAllLoaded && <Box>There is no more notes.</Box>}
+        </div>
     );
 
     // const [noteList, setNoteList] = useNoteList();
