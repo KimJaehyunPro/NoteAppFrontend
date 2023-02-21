@@ -17,7 +17,6 @@ export default function ReadNoteListPage(props) {
     const [page, setPage] = useState(1);
 
     const fetchMoreData = () => {
-        console.log("fetMoreData is executed.");
         fetch(`${process.env.REACT_APP_BACKEND_URL}/${NOTE_API_URL}/?page=${page}&size=5&sort=id,desc`)
             .then(response => response.json())
             .then(data => {
@@ -36,27 +35,19 @@ export default function ReadNoteListPage(props) {
 
     const handleScroll = () => {
         if (window.innerHeight + document.documentElement.scrollTop >= document.documentElement.offsetHeight) {
-            console.log("You hit the rock bottom!");
             window.removeEventListener('scroll', handleScroll);
             fetchMoreData();
         }
     };
-
+    
     useEffect(() => {
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
     }, [page]);
-
     return (
-        <div>
+        <div style={{ height: '101vh' }}>
             {noteList.length > 0 ? <Notes noteList={noteList} setNoteList={setNoteList} /> : <EmptyNotes />}
             {isNotesAllLoaded && <Box>There is no more notes.</Box>}
         </div>
     );
-
-    // const [noteList, setNoteList] = useNoteList();
-
-    // return (
-    //     noteList.length > 0 ? <Notes noteList={noteList} setNoteList={setNoteList} /> : <EmptyNotes />
-    // )
 }
