@@ -1,6 +1,8 @@
 import Notes from './Notes';
 import useNoteList from './utils/useNoteList';
 
+import { GET_NOTE_LIST_PAGE_SIZE, GET_NOTE_LIST_SORT } from '../../Constants/constants';
+
 import { NOTE_API_URL } from '../../Constants/endpoints';
 
 import { Typography, Box } from '@mui/material';
@@ -12,12 +14,12 @@ const EmptyNotes = () => {
 
 export default function ReadNoteListPage(props) {
 
-    const [noteList, setNoteList] = useNoteList();
+    const [noteList, setNoteList] = useNoteList(GET_NOTE_LIST_PAGE_SIZE, GET_NOTE_LIST_SORT);
     const [isNotesAllLoaded, setIsNotesAllLoaded] = useState(false);
     const [page, setPage] = useState(1);
 
     const fetchMoreData = () => {
-        fetch(`${process.env.REACT_APP_BACKEND_URL}/${NOTE_API_URL}/?page=${page}&size=5&sort=id,desc`)
+        fetch(`${process.env.REACT_APP_BACKEND_URL}/${NOTE_API_URL}/?page=${page}&size=${GET_NOTE_LIST_PAGE_SIZE}&sort=${GET_NOTE_LIST_SORT}`)
             .then(response => response.json())
             .then(data => {
                 const notes = data.content;
@@ -44,6 +46,7 @@ export default function ReadNoteListPage(props) {
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
     }, [page]);
+
     return (
         <div style={{ height: '101vh' }}>
             {noteList.length > 0 ? <Notes noteList={noteList} setNoteList={setNoteList} /> : <EmptyNotes />}
