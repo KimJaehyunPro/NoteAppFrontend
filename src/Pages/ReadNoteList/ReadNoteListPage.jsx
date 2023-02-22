@@ -6,7 +6,7 @@ import { GET_NOTE_LIST_PAGE_SIZE, GET_NOTE_LIST_SORT } from '../../Constants/con
 import { NOTE_API_URL } from '../../Constants/endpoints';
 
 import { Typography, Box } from '@mui/material';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 const EmptyNotes = () => {
     return <Typography>No notes found.</Typography>
@@ -19,6 +19,7 @@ export default function ReadNoteListPage(props) {
     const [page, setPage] = useState(1);
 
     const fetchMoreData = () => {
+        console.log("FetchMoreData happening");
         fetch(`${process.env.REACT_APP_BACKEND_URL}/${NOTE_API_URL}/?page=${page}&size=${GET_NOTE_LIST_PAGE_SIZE}&sort=${GET_NOTE_LIST_SORT}`)
             .then(response => response.json())
             .then(data => {
@@ -32,19 +33,25 @@ export default function ReadNoteListPage(props) {
                     // If there is no note, DO NOT listen to 'scroll' event anymore, since there's no note to get anyway.
                     setIsNotesAllLoaded(true);
                 }
+
             })
     };
 
     const handleScroll = () => {
-        if (window.innerHeight + document.documentElement.scrollTop >= document.documentElement.offsetHeight) {
+        if (window.innerHeight + document.documentElement.scrollTop >= document.documentElement.scrollHeight) {
             window.removeEventListener('scroll', handleScroll);
+
             fetchMoreData();
         }
     };
-    
+
+    // EventListener -> handlesScroll 1
+    //
     useEffect(() => {
         window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
     }, [page]);
 
     return (
