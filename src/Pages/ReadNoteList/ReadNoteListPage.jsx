@@ -1,12 +1,12 @@
 import Notes from './Notes';
-import useNoteList from './utils/useNoteList';
-
-import { GET_NOTE_LIST_PAGE_SIZE, GET_NOTE_LIST_SORT } from '../../Constants/constants';
 
 import { NOTE_API_URL } from '../../Constants/endpoints';
 
 import { Typography, Box } from '@mui/material';
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
+import useNoteList from './utils/useNoteList';
+
+import { GET_NOTE_LIST_PAGE_SIZE, GET_NOTE_LIST_SORT } from '../../Constants/constants';
 
 const EmptyNotes = () => {
     return <Typography>No notes found.</Typography>
@@ -14,13 +14,14 @@ const EmptyNotes = () => {
 
 export default function ReadNoteListPage(props) {
 
-    const [noteList, setNoteList] = useNoteList(GET_NOTE_LIST_PAGE_SIZE, GET_NOTE_LIST_SORT);
+    const { fetchMethod, query } = props;
+    const [noteList, setNoteList] = useNoteList(fetchMethod, query);
     const [isNotesAllLoaded, setIsNotesAllLoaded] = useState(false);
     const [page, setPage] = useState(1);
 
     const fetchMoreData = () => {
         console.log("FetchMoreData happening");
-        fetch(`${process.env.REACT_APP_BACKEND_URL}/${NOTE_API_URL}/?page=${page}&size=${GET_NOTE_LIST_PAGE_SIZE}&sort=${GET_NOTE_LIST_SORT}`)
+        fetch(`${process.env.REACT_APP_BACKEND_URL}/${NOTE_API_URL}/${fetchMethod ? fetchMethod : ''}?${query ? `query=${query}&` : ''}page=${page}&size=${GET_NOTE_LIST_PAGE_SIZE}&sort=${GET_NOTE_LIST_SORT}`)
             .then(response => response.json())
             .then(data => {
                 const notes = data.content;
@@ -40,7 +41,6 @@ export default function ReadNoteListPage(props) {
     const handleScroll = () => {
         if (window.innerHeight + document.documentElement.scrollTop >= document.documentElement.scrollHeight) {
             window.removeEventListener('scroll', handleScroll);
-
             fetchMoreData();
         }
     };

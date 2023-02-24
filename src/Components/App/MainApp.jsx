@@ -9,7 +9,7 @@ import ReadNotePage from '../../Pages/ReadNote/ReadNotePage';
 import UpdateNotePage from '../../Pages/UpdateNote/UpdateNotePage';
 
 export default function MainApp(props) {
-
+  
   const router = createBrowserRouter([
     {
       path: "/",
