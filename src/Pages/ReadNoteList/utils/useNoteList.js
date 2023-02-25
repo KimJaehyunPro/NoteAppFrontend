@@ -5,7 +5,7 @@ export default function useNoteList(fetchMethod, query) {
     const [noteList, setNoteList] = useState([]);
 
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_BACKEND_URL}/${NOTE_API_URL}/${fetchMethod ? fetchMethod : ''}?${query ? `query=${query}` : ''}`)
+        fetch(`${process.env.REACT_APP_BACKEND_URL}/${NOTE_API_URL}/${fetchMethod ? `search/${fetchMethod}` : ''}?${query ? `query=${query}` : ''}`)
             .then(response => response.json())
             .then(data => {
                 setNoteList(data.content);

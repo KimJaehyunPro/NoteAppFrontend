@@ -7,21 +7,24 @@ import React, { useState, useEffect } from 'react';
 import useNoteList from './utils/useNoteList';
 
 import { GET_NOTE_LIST_PAGE_SIZE, GET_NOTE_LIST_SORT } from '../../Constants/constants';
+import { useSearchParams } from 'react-router-dom';
 
 const EmptyNotes = () => {
     return <Typography>No notes found.</Typography>
 }
 
 export default function ReadNoteListPage(props) {
-
-    const { fetchMethod, query } = props;
+    const [searchParams] = useSearchParams();
+    
+    const fetchMethod = searchParams.get('fetchMethod');
+    const query = searchParams.get('query');
+    
     const [noteList, setNoteList] = useNoteList(fetchMethod, query);
     const [isNotesAllLoaded, setIsNotesAllLoaded] = useState(false);
     const [page, setPage] = useState(1);
 
     const fetchMoreData = () => {
-        console.log("FetchMoreData happening");
-        fetch(`${process.env.REACT_APP_BACKEND_URL}/${NOTE_API_URL}/${fetchMethod ? fetchMethod : ''}?${query ? `query=${query}&` : ''}page=${page}&size=${GET_NOTE_LIST_PAGE_SIZE}&sort=${GET_NOTE_LIST_SORT}`)
+        fetch(`${process.env.REACT_APP_BACKEND_URL}/${NOTE_API_URL}/${fetchMethod ? `search/${fetchMethod}` : ''}?${query ? `query=${query}&` : ''}page=${page}&size=${GET_NOTE_LIST_PAGE_SIZE}&sort=${GET_NOTE_LIST_SORT}`)
             .then(response => response.json())
             .then(data => {
                 const notes = data.content;
@@ -34,7 +37,6 @@ export default function ReadNoteListPage(props) {
                     // If there is no note, DO NOT listen to 'scroll' event anymore, since there's no note to get anyway.
                     setIsNotesAllLoaded(true);
                 }
-
             })
     };
 
@@ -45,8 +47,6 @@ export default function ReadNoteListPage(props) {
         }
     };
 
-    // EventListener -> handlesScroll 1
-    //
     useEffect(() => {
         window.addEventListener('scroll', handleScroll);
         return () => {

@@ -6,6 +6,10 @@ import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
 import AutoStoriesRoundedIcon from '@mui/icons-material/AutoStoriesRounded';
 import BorderColorRoundedIcon from '@mui/icons-material/BorderColorRounded';
 
+import { useNavigate } from "react-router-dom";
+import { NOTE_URL } from "../../Constants/endpoints";
+import { FETCH_METHOD_SEARCH_TAG } from "../../Constants/constants";
+
 const themeColor = "#1976d2"
 
 const NoteBodySection = (props) => {
@@ -24,10 +28,16 @@ const NoteBodySection = (props) => {
 
 const TagSection = (props) => {
     const { tags } = props;
+
+    const navigate = useNavigate();
+
     return (
         <Stack direction="row" spacing={1}>
             {tags.map((tag) =>
-                <Chip key={tag.id} sx={{fontSize: "0.875em", fontWeight: "bold", color: "white", backgroundColor: themeColor }} label={tag.name} />
+                <Chip key={tag.id} label={tag.name} onClick={() => {
+                    navigate(`/${NOTE_URL}?fetchMethod=${FETCH_METHOD_SEARCH_TAG}&query=${tag.name}`);
+                    navigate(0);
+                }} />
             )}
         </Stack>
     )
@@ -63,7 +73,7 @@ export default function Notes(props) {
         <div>
             {noteList.map((note) => {
                 return (
-                    <Paper elevation={2} key={note.id} sx={{ margin: 2, padding: 3, border: 3, borderColor: themeColor, borderRadius: "30px"}}>
+                    <Paper elevation={2} key={note.id} sx={{ margin: 2, padding: 3, border: 3, borderColor: themeColor, borderRadius: "30px" }}>
                         <Stack spacing={1}>
                             <NoteBodySection title={note.title} content={note.content} />
                             <TagSection tags={note.tags} />
