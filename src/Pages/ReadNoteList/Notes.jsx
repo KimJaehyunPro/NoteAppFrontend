@@ -1,28 +1,22 @@
 import useDeleteNoteRequest from "../../Hooks/useDeleteNoteRequest";
-import { NOTE_API_URL, UPDATE_NOTE_URL } from "../../Constants/endpoints";
+import { UPDATE_NOTE_URL } from "../../Constants/endpoints";
 
-import { Button, Chip, Paper, Stack, Typography } from "@mui/material";
+import { Chip, Stack, Typography, Card, CardActionArea, CardHeader, CardContent, IconButton } from "@mui/material";
 import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
-import AutoStoriesRoundedIcon from '@mui/icons-material/AutoStoriesRounded';
 import BorderColorRoundedIcon from '@mui/icons-material/BorderColorRounded';
 
 import { useNavigate } from "react-router-dom";
 import { NOTE_URL } from "../../Constants/endpoints";
 import { FETCH_METHOD_SEARCH_TAG } from "../../Constants/constants";
 
-const themeColor = "#1976d2"
-
 const NoteBodySection = (props) => {
-    const { title, content } = props
+    const { content } = props
     const maxContentCharacterLength = 100;
     return (
-        <>
-            <Typography variant="h6">{title}</Typography>
-            <Typography>{
-                ((content.length > maxContentCharacterLength) ?
-                    `${content.slice(0, maxContentCharacterLength)} ...` : content)}
-            </Typography>
-        </>
+        <Typography>{
+            ((content.length > maxContentCharacterLength) ?
+                `${content.slice(0, maxContentCharacterLength)} ...` : content)}
+        </Typography>
     )
 }
 
@@ -31,10 +25,20 @@ const TagSection = (props) => {
 
     const navigate = useNavigate();
 
+    const style = {
+        "marginTop": 2
+    };
+
     return (
-        <Stack direction="row" spacing={1}>
+        <Stack direction="row" spacing={1} sx={style}
+            onMouseDown={event => event.stopPropagation()}
+            onClick={(event) => {
+                event.stopPropagation();
+                event.preventDefault();
+            }}
+        >
             {tags.map((tag) =>
-                <Chip key={tag.id} label={tag.name} onClick={() => {
+                <Chip key={tag.id} size="small" label={tag.name} onClick={() => {
                     navigate(`/${NOTE_URL}?fetchMethod=${FETCH_METHOD_SEARCH_TAG}&query=${tag.name}`);
                     navigate(0);
                 }} />
@@ -44,25 +48,30 @@ const TagSection = (props) => {
 }
 
 const ActionButtonSection = (props) => {
-    const { noteList, noteId, setNoteList } = props;
+    const { noteList, setNoteList, noteId } = props;
     const deleteNoteRequest = useDeleteNoteRequest();
-    const buttonStyle = {
-        "borderRadius": "20px"
-    }
+    const navigate = useNavigate();
 
     return (
-        <Stack direction="row" justifyContent="flex-end" spacing={2}>
-            <Button style={buttonStyle} color="success" variant="outlined" href={`${NOTE_API_URL}/${noteId}`}
-                startIcon={<AutoStoriesRoundedIcon />}>View</Button>
-            <Button style={buttonStyle} color="secondary" variant="outlined" href={`${UPDATE_NOTE_URL}/${noteId}`}
-                startIcon={<BorderColorRoundedIcon />}>Edit</Button>
-            <Button style={buttonStyle} color="error" variant="outlined" startIcon={<DeleteRoundedIcon />}
-                onClick={() => {
-                    deleteNoteRequest(noteId, () => {
-                        const noteListWithoutDeletedNote = noteList.filter(n => n.id !== noteId);
-                        setNoteList(noteListWithoutDeletedNote)
-                    });
-                }}>Delete</Button>
+        <Stack direction="row" justifyContent="flex-end" spacing={2} sx={{ marginLeft: "auto" }}
+            onMouseDown={event => event.stopPropagation()}
+            onClick={(event) => {
+                event.stopPropagation();
+                event.preventDefault();
+            }}>
+            <IconButton onClick={() => {
+                navigate(`/${UPDATE_NOTE_URL}/${noteId}`);
+            }}>
+                <BorderColorRoundedIcon />
+            </IconButton>
+            <IconButton onClick={() => {
+                deleteNoteRequest(noteId, () => {
+                    const noteListWithoutDeletedNote = noteList.filter(n => n.id !== noteId);
+                    setNoteList(noteListWithoutDeletedNote)
+                });
+            }}>
+                <DeleteRoundedIcon />
+            </IconButton>
         </Stack>
     )
 }
@@ -70,18 +79,22 @@ const ActionButtonSection = (props) => {
 export default function Notes(props) {
     const { noteList, setNoteList } = props;
     return (
-        <div>
+        <Stack spacing={3}>
             {noteList.map((note) => {
                 return (
-                    <Paper elevation={2} key={note.id} sx={{ margin: 2, padding: 3, border: 3, borderColor: themeColor, borderRadius: "30px" }}>
-                        <Stack spacing={1}>
-                            <NoteBodySection title={note.title} content={note.content} />
-                            <TagSection tags={note.tags} />
-                            <ActionButtonSection noteList={noteList} noteId={note.id} setNoteList={setNoteList} />
-                        </Stack>
-                    </Paper>
+                    <Card variant="outlined">
+                        <CardActionArea sx={{ padding: 2 }} onClick={() => { alert("hello"); }}>
+                            <CardHeader title={note.title} subheader={<TagSection tags={note.tags} />} action={<ActionButtonSection noteList={noteList} setNoteList={setNoteList} noteId={note.id} />}>
+                            </CardHeader>
+                            <CardContent>
+                                <Stack spacing={2}>
+                                    <NoteBodySection content={note.content} />
+                                </Stack>
+                            </CardContent>
+                        </CardActionArea>
+                    </Card>
                 );
             })}
-        </div>
+        </Stack>
     )
 }
