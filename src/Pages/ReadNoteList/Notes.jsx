@@ -9,6 +9,8 @@ import { useNavigate } from "react-router-dom";
 import { NOTE_URL } from "../../Constants/endpoints";
 import { FETCH_METHOD_SEARCH_TAG } from "../../Constants/constants";
 
+import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
+
 const NoteBodySection = (props) => {
     const { content } = props
     const maxContentCharacterLength = 100;
@@ -82,21 +84,28 @@ export default function Notes(props) {
     const { noteList, setNoteList } = props;
     return (
         <Stack spacing={3}>
-            {noteList.map((note) => {
-                return (
-                    <Card variant="outlined">
-                        <CardActionArea sx={{ padding: 2 }} onClick={() => { alert("hello"); }}>
-                            <CardHeader title={note.title} subheader={<TagSection tags={note.tags} />} action={<ActionButtonSection noteList={noteList} setNoteList={setNoteList} noteId={note.id} />}>
-                            </CardHeader>
-                            <CardContent>
-                                <Stack spacing={2}>
-                                    <NoteBodySection content={note.content} />
-                                </Stack>
-                            </CardContent>
-                        </CardActionArea>
-                    </Card>
-                );
-            })}
+
+            <Grid2 container spacing={1}>
+                {noteList.map((note) => {
+                    return (
+                        <Grid2 sm={12} lg={6} xl={3}>
+                            <Card variant="outlined">
+                                <CardActionArea sx={{ padding: 2 }} onClick={() => { alert("hello"); }}>
+                                    <CardHeader title={note.title} action={<ActionButtonSection noteList={noteList} setNoteList={setNoteList} noteId={note.id} />}>
+                                    </CardHeader>
+                                    <CardContent>
+                                        <Stack spacing={2}>
+                                            <NoteBodySection content={note.content} />
+                                            <TagSection tags={note.tags} />
+                                        </Stack>
+                                    </CardContent>
+                                </CardActionArea>
+                            </Card>
+                        </Grid2>
+                    );
+                })}
+            </Grid2>
+
         </Stack>
     )
 }

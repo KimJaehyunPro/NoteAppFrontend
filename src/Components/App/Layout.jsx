@@ -22,11 +22,9 @@ export default function Layout(props) {
             <CssBaseline />
             <MainAppBar drawerWidth={drawerWidth} handleDrawerToggle={handleDrawerToggle} />
             <MainDrawer drawerWidth={drawerWidth} mobileOpen={mobileOpen} handleDrawerToggle={handleDrawerToggle} container={container} />
-            <Container sx={{ flexGrow: 1, p: 3, width: { sm: "95%" } }}>
-                <Box
-                    component="main"
-                    sx={{ flexGrow: 1, p: 3, width: { sm: "95%" } }}
-                >
+            {/*<Container sx={{ flexGrow: 1, p: 3, width: { sm: "95%" } }}></Container>*/}
+            <Container maxWidth="100%">
+                <Box component="main" padding={5}>
                     <Toolbar />
                     <Outlet />
                 </Box>
