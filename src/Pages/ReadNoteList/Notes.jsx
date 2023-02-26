@@ -26,8 +26,10 @@ const TagSection = (props) => {
     const navigate = useNavigate();
 
     const style = {
-        "marginTop": 2
+        "marginTop": 2,
+        "width": "fit-content"
     };
+
 
     return (
         <Stack direction="row" spacing={1} sx={style}
