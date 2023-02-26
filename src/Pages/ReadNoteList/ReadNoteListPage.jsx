@@ -1,24 +1,50 @@
 import Notes from './Notes';
-
+import useNoteList from './utils/useNoteList';
+import { GET_NOTE_LIST_PAGE_SIZE, GET_NOTE_LIST_SORT } from '../../Constants/constants';
 import { NOTE_API_URL } from '../../Constants/endpoints';
 
-import { Typography, Box } from '@mui/material';
+import { Typography, Box, TextField, Grid } from '@mui/material';
+import Grid2 from '@mui/material/Unstable_Grid2';
 import React, { useState, useEffect } from 'react';
-import useNoteList from './utils/useNoteList';
-
-import { GET_NOTE_LIST_PAGE_SIZE, GET_NOTE_LIST_SORT } from '../../Constants/constants';
 import { useSearchParams } from 'react-router-dom';
 
 const EmptyNotes = () => {
     return <Typography>No notes found.</Typography>
 }
 
+function NoteSearchInputField(props) {
+
+    const [inputValue, setInputValue] = useState('');
+
+    useEffect(() => {
+      let timeout;
+      if (inputValue !== '') {
+        timeout = setTimeout(() => {
+          hello();
+        }, 500);
+      }
+      return () => clearTimeout(timeout);
+    }, [inputValue]);
+   
+    const handleChange = (event) => {
+        setInputValue(event.target.value);
+      };
+  
+    const hello = () => {
+      console.log('Load note list.');
+    };
+
+    return (
+        <TextField id="note-search-input-field" label="Search Notes" placeholder='#Tag / Title or Content ' variant="outlined" fullWidth onChange={handleChange} />
+    )
+}
+
 export default function ReadNoteListPage(props) {
     const [searchParams] = useSearchParams();
-    
+
     const fetchMethod = searchParams.get('fetchMethod');
     const query = searchParams.get('query');
-    
+
     const [noteList, setNoteList] = useNoteList(fetchMethod, query);
     const [isNotesAllLoaded, setIsNotesAllLoaded] = useState(false);
     const [page, setPage] = useState(1);
@@ -55,9 +81,14 @@ export default function ReadNoteListPage(props) {
     }, [page]);
 
     return (
-        <div style={{ height: '101vh' }}>
-            {noteList.length > 0 ? <Notes noteList={noteList} setNoteList={setNoteList} /> : <EmptyNotes />}
-            {isNotesAllLoaded && <Box>There is no more notes.</Box>}
-        </div>
+        <Grid2 container spacing={2} sx={{ height: '101vh' }}>
+            <Grid2 xs="auto" sm={8} md={6} lg={4} xl={3} sx={{ margin: "auto", height: "auto" }}>
+                <NoteSearchInputField />
+            </Grid2>
+            <Grid2>
+                {noteList.length > 0 ? <Notes noteList={noteList} setNoteList={setNoteList} /> : <EmptyNotes />}
+                {isNotesAllLoaded && <Box>There is no more notes.</Box>}
+            </Grid2>
+        </Grid2>
     );
 }

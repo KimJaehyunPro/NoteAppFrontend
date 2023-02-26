@@ -82,21 +82,27 @@ const ActionButtonSection = (props) => {
 
 export default function Notes(props) {
     const { noteList, setNoteList } = props;
+    const navigate = useNavigate();
     return (
         <Stack spacing={3}>
 
             <Grid2 container spacing={1}>
                 {noteList.map((note) => {
+                    const noteId = note.id;
+                    const title = note.title;
+                    const content = note.content;
+                    const tags = note.tags;
+
                     return (
-                        <Grid2 sm={12} lg={6} xl={3}>
+                        <Grid2 sm={12} lg={6} xl={3} key={noteId}>
                             <Card variant="outlined">
-                                <CardActionArea sx={{ padding: 2 }} onClick={() => { alert("hello"); }}>
-                                    <CardHeader title={note.title} action={<ActionButtonSection noteList={noteList} setNoteList={setNoteList} noteId={note.id} />}>
+                                <CardActionArea sx={{ padding: 2 }} onClick={() => { navigate(`/${NOTE_URL}/${noteId}`); }}>
+                                    <CardHeader title={title} action={<ActionButtonSection noteList={noteList} setNoteList={setNoteList} noteId={noteId} />}>
                                     </CardHeader>
                                     <CardContent>
                                         <Stack spacing={2}>
-                                            <NoteBodySection content={note.content} />
-                                            <TagSection tags={note.tags} />
+                                            <NoteBodySection content={content} />
+                                            <TagSection tags={tags} />
                                         </Stack>
                                     </CardContent>
                                 </CardActionArea>

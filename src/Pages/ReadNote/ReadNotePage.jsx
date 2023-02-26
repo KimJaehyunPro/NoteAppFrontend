@@ -25,7 +25,7 @@ export default function ReadNotePage(props) {
     }
 
     return (
-        <Paper elevation={3} sx={{ border: 1, padding: 4, border: 2, borderColor: "black"}}>
+        <Paper elevation={3} sx={{ border: 1, padding: 4, borderColor: "blue"}}>
             <Stack spacing={3}>
                 <Typography variant="h3">{title}</Typography>
 
