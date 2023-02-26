@@ -13,7 +13,7 @@ import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 
 const NoteBodySection = (props) => {
     const { content } = props
-    const maxContentCharacterLength = 100;
+    const maxContentCharacterLength = 200;
     return (
         <Typography>{
             ((content.length > maxContentCharacterLength) ?

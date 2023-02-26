@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { NOTE_URL, CREATE_NOTE_URL, UPDATE_NOTE_URL } from '../../Constants/endpoints';
 
-import { createBrowserRouter, RouterProvider, useNavigate } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Layout from './Layout';
 import CreateNotePage from '../../Pages/CreateNote/CreateNotePage';
 import ReadNoteListPage from '../../Pages/ReadNoteList/ReadNoteListPage';
