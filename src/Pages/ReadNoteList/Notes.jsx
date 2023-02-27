@@ -85,7 +85,6 @@ export default function Notes(props) {
     const navigate = useNavigate();
     return (
         <Stack spacing={3}>
-
             <Grid2 container spacing={1}>
                 {noteList.map((note) => {
                     const noteId = note.id;
@@ -94,7 +93,8 @@ export default function Notes(props) {
                     const tags = note.tags;
 
                     return (
-                        <Grid2 sm={12} lg={6} xl={3} key={noteId}>
+                        // 
+                        <Grid2 xs={12} md={6} lg={4} xl={3} key={noteId}>
                             <Card variant="outlined">
                                 <CardActionArea sx={{ padding: 2 }} onClick={() => { navigate(`/${NOTE_URL}/${noteId}`); }}>
                                     <CardHeader title={title} action={<ActionButtonSection noteList={noteList} setNoteList={setNoteList} noteId={noteId} />}>
