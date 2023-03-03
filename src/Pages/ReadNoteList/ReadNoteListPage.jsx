@@ -1,10 +1,8 @@
 import Notes from './Notes';
 import useNoteList from './utils/useNoteList';
 
-import { Typography, TextField } from '@mui/material';
-import Grid2 from '@mui/material/Unstable_Grid2';
+import { Typography, TextField, Grid } from '@mui/material';
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { useSearchParams } from 'react-router-dom';
 
 const EmptyNotes = () => {
     return <Typography>No notes found.</Typography>
@@ -63,32 +61,42 @@ export default function ReadNoteListPage(props) {
     }, [inputValue]);
 
     return (
-        <Grid2 container spacing={2} sx={{ height: '101vh' }}>
-            <Grid2>
-                <TextField
-                    id="note-search-input-field"
-                    label="Search Notes"
-                    placeholder='#Tag / Title or Content '
-                    helperText="Please enter your name"
-                    variant="outlined"
-                    focused
-                    onChange={handleInputChange} />
-            </Grid2>
-            <Grid2 container>
-                <div>
-                    {noteList ? noteList.map((note, index) => {
-                        if (noteList.length === index + 1) {
-                            return <div key={note.id} ref={lastNoteRef}>{note.title}. Last element!</div>
-                        } else {
-                            return <div key={note.id}>{note.title}</div>
-                        }
-                    }) : <div>No note is found.</div>}
-                </div>
-            </Grid2>
-            <Grid2>
-                <div>isLoading?: {isLoading}</div>
-            </Grid2>
-        </Grid2>
+        <Grid container spacing={2}>
+
+            <Grid
+                container
+                spacing={0}
+                direction="column"
+                alignItems="center"
+                justifyContent="center"
+            >
+
+                <Grid container
+                    xs={12}
+                    md={8}
+                    lg={4}
+                    xl={3}>
+                    <TextField
+                        id="note-search-input-field"
+                        label="Search Notes"
+                        placeholder='#Tag / Title or Content '
+                        helperText="Please enter your name"
+                        variant="outlined"
+                        fullWidth
+                        focused
+                        onChange={handleInputChange} />
+                </Grid>
+
+            </Grid>
+
+
+            <Grid container>
+                <Notes noteList={noteList} lastNoteRef={lastNoteRef} />
+            </Grid>
+            <Grid>
+                {isLoading ? <p>Loading...</p> : <p>Loading finished</p>}
+            </Grid>
+        </Grid>
 
     );
 }

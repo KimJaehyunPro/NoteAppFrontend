@@ -79,22 +79,40 @@ const ActionButtonSection = (props) => {
         </Stack>
     )
 }
+// <Grid2 xs={12} md={6} lg={4} xl={3} key={noteId}>
+//     <Card variant="outlined">
+//         <CardActionArea sx={{ padding: 2 }} onClick={() => { navigate(`/${NOTE_URL}/${noteId}`); }}>
+//             <CardHeader title={title} action={<ActionButtonSection noteList={noteList} setNoteList={setNoteList} noteId={noteId} />}>
+//             </CardHeader>
+//             <CardContent>
+//                 <Stack spacing={2}>
+//                     <NoteBodySection content={content} />
+//                     <TagSection tags={tags} />
+//                 </Stack>
+//             </CardContent>
+//         </CardActionArea>
+//     </Card>
+// </Grid2>
+
+
+
 
 export default function Notes(props) {
-    const { noteList, setNoteList } = props;
+    const { noteList, setNoteList, lastNoteRef } = props;
     const navigate = useNavigate();
+
     return (
         <Stack spacing={3}>
             <Grid2 container spacing={1}>
-                {noteList.map((note) => {
-                    const noteId = note.id;
-                    const title = note.title;
-                    const content = note.content;
-                    const tags = note.tags;
+                {noteList.map((note, index) => {
+
+                    const { id: noteId, title, content, tags } = note;
+
+
+                    const isLastNote = ((index + 1) === noteList.length);
 
                     return (
-                        // 
-                        <Grid2 xs={12} md={6} lg={4} xl={3} key={noteId}>
+                        <Grid2 ref={isLastNote ? lastNoteRef : null} xs={12} md={6} lg={4} xl={3} key={noteId}>
                             <Card variant="outlined">
                                 <CardActionArea sx={{ padding: 2 }} onClick={() => { navigate(`/${NOTE_URL}/${noteId}`); }}>
                                     <CardHeader title={title} action={<ActionButtonSection noteList={noteList} setNoteList={setNoteList} noteId={noteId} />}>
@@ -108,7 +126,7 @@ export default function Notes(props) {
                                 </CardActionArea>
                             </Card>
                         </Grid2>
-                    );
+                    )
                 })}
             </Grid2>
 
