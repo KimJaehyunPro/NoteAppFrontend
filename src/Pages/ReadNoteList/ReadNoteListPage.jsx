@@ -14,7 +14,7 @@ export default function ReadNoteListPage(props) {
     const [inputValue, setInputValue] = useState('');
     const [query, setQuery] = useState('');
 
-    const [page, setPage] = useState(1);
+    const [page, setPage] = useState(0);
 
     const { noteList, isLoading, hasMore } = useNoteList(fetchMethod, query, page);
 

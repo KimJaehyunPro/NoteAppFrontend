@@ -1,15 +1,13 @@
 import useDeleteNoteRequest from "../../Hooks/useDeleteNoteRequest";
 import { UPDATE_NOTE_URL } from "../../Constants/endpoints";
 
-import { Chip, Stack, Typography, Card, CardActionArea, CardHeader, CardContent, IconButton } from "@mui/material";
+import { Chip, Stack, Grid, Typography, Card, CardActionArea, CardHeader, CardContent, IconButton } from "@mui/material";
 import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
 import BorderColorRoundedIcon from '@mui/icons-material/BorderColorRounded';
 
 import { useNavigate } from "react-router-dom";
 import { NOTE_URL } from "../../Constants/endpoints";
 import { FETCH_METHOD_SEARCH_TAG } from "../../Constants/constants";
-
-import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 
 const NoteBodySection = (props) => {
     const { content } = props
@@ -43,7 +41,7 @@ const TagSection = (props) => {
         >
             {tags.map((tag) =>
                 <Chip key={tag.id} size="small" label={tag.name} onClick={() => {
-                    navigate(`/${NOTE_URL}?fetchMethod=${FETCH_METHOD_SEARCH_TAG}&query=${tag.name}`);
+                    navigate(`/${NOTE_URL}/search/${FETCH_METHOD_SEARCH_TAG}?query=${tag.name}`);
                     navigate(0);
                 }} />
             )}
@@ -94,7 +92,11 @@ const ActionButtonSection = (props) => {
 //     </Card>
 // </Grid2>
 
-
+function dateHandler(localDateTime) {
+    const dateObj = new Date(localDateTime);
+    const formattedDate = dateObj.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' }) + ", " + dateObj.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+    return formattedDate;
+}
 
 
 export default function Notes(props) {
@@ -102,34 +104,33 @@ export default function Notes(props) {
     const navigate = useNavigate();
 
     return (
-        <Stack spacing={3}>
-            <Grid2 container spacing={1}>
-                {noteList.map((note, index) => {
+        <Grid container spacing={1}>
+            {noteList.map((note, index) => {
 
-                    const { id: noteId, title, content, tags } = note;
+                const { id: noteId, title, content, tags } = note;
 
 
-                    const isLastNote = ((index + 1) === noteList.length);
+                const isLastNote = ((index + 1) === noteList.length);
 
-                    return (
-                        <Grid2 ref={isLastNote ? lastNoteRef : null} xs={12} md={6} lg={4} xl={3} key={noteId}>
-                            <Card variant="outlined">
-                                <CardActionArea sx={{ padding: 2 }} onClick={() => { navigate(`/${NOTE_URL}/${noteId}`); }}>
-                                    <CardHeader title={title} action={<ActionButtonSection noteList={noteList} setNoteList={setNoteList} noteId={noteId} />}>
-                                    </CardHeader>
-                                    <CardContent>
-                                        <Stack spacing={2}>
-                                            <NoteBodySection content={content} />
-                                            <TagSection tags={tags} />
-                                        </Stack>
-                                    </CardContent>
-                                </CardActionArea>
-                            </Card>
-                        </Grid2>
-                    )
-                })}
-            </Grid2>
-
-        </Stack>
+                return (
+                    <Grid item ref={isLastNote ? lastNoteRef : null} xs={12} md={6} lg={4} xl={3} key={noteId}>
+                        <Card variant="outlined">
+                            <CardActionArea sx={{ padding: 2 }} onClick={() => { navigate(`/${NOTE_URL}/${noteId}`); }}>
+                                <CardHeader title={title} action={<ActionButtonSection noteList={noteList} setNoteList={setNoteList} noteId={noteId} />}>
+                                </CardHeader>
+                                <CardContent>
+                                    <Stack spacing={2}>
+                                        <NoteBodySection content={content} />
+                                        <TagSection tags={tags} />
+                                        <Typography variant="h7">Created: {dateHandler(note.creationTimestamp)}</Typography>
+                                        <Typography variant="h7">Last opened: {dateHandler(note.lastOpenTimestamp)}</Typography>
+                                    </Stack>
+                                </CardContent>
+                            </CardActionArea>
+                        </Card>
+                    </Grid>
+                )
+            })}
+        </Grid>
     )
 }

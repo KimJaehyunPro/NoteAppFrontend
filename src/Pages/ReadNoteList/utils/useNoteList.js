@@ -12,7 +12,6 @@ export default function useNoteList(fetchMethod, query, page) {
     }, [query])
 
     useEffect(() => {
-        console.log('useNoteList executed');
         if (isLoading) return;
         setIsLoading(true);
     
@@ -23,9 +22,7 @@ export default function useNoteList(fetchMethod, query, page) {
           {
             signal: abortController.signal,
           })
-            .then(response => {
-                return response.json();
-            })
+            .then(response => response.json())
             .then(data => {
                 setNoteList(prevNoteList => {
                     if (!data.content) return
