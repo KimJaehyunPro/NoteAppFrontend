@@ -1,12 +1,8 @@
 import Notes from './Notes';
 import useNoteList from './utils/useNoteList';
 
-import { Typography, TextField, Grid } from '@mui/material';
+import { TextField, Grid } from '@mui/material';
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-
-const EmptyNotes = () => {
-    return <Typography>No notes found.</Typography>
-}
 
 export default function ReadNoteListPage(props) {
 
@@ -29,13 +25,11 @@ export default function ReadNoteListPage(props) {
 
         observer.current = new IntersectionObserver(entries => {
             if (entries[0].isIntersecting && hasMore) {
-                console.log(`entries[0] is intersecting.`);
                 setPage(prevPage => prevPage + 1);
             }
         });
 
         if (node) observer.current.observe(node);
-        console.log(`node: ${node}`);
     }, [isLoading, hasMore]);
 
     // If it has been more than ? seconds since the user typed search input, trigger search
@@ -46,7 +40,6 @@ export default function ReadNoteListPage(props) {
             timeout = setTimeout(() => {
                 setPage(0);
                 if (inputValue[0] === '#') {
-                    console.log('tagged!');
                     setQuery(inputValue.slice(1));
                     setFetchMethod('tag');
                 } else {
@@ -79,8 +72,8 @@ export default function ReadNoteListPage(props) {
                     <TextField
                         id="note-search-input-field"
                         label="Search Notes"
-                        placeholder='#Tag / Title or Content '
-                        helperText="Please enter your name"
+                        placeholder='Title or Content / #Tag'
+                        helperText={`Current query: ` + (fetchMethod ? `#${query}` : query)}
                         variant="outlined"
                         fullWidth
                         focused
@@ -91,7 +84,11 @@ export default function ReadNoteListPage(props) {
 
 
             <Grid container>
-                <Notes noteList={noteList} lastNoteRef={lastNoteRef} />
+                <Notes noteList={noteList} lastNoteRef={lastNoteRef} onTagClick={(query) => {
+                    setFetchMethod('tag');
+                    setQuery(query);
+                    setPage(0);
+                }}/>
             </Grid>
             <Grid>
                 {isLoading ? <p>Loading...</p> : <p>Loading finished</p>}

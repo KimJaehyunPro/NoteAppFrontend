@@ -19,6 +19,10 @@ export default function MainApp(props) {
           path: `/${NOTE_URL}`,
           element: <ReadNoteListPage />
         },
+        // {
+        //   path: `/${NOTE_URL}/search/${FETCH_METHOD_SEARCH_TAG}/:tagName`,
+        //   element: <ReadNoteListPage tagName={tagName}/>
+        // },
         {
           path: `${NOTE_URL}/:noteId`,
           element: <ReadNotePage />

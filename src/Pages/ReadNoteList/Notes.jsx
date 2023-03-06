@@ -7,7 +7,6 @@ import BorderColorRoundedIcon from '@mui/icons-material/BorderColorRounded';
 
 import { useNavigate } from "react-router-dom";
 import { NOTE_URL } from "../../Constants/endpoints";
-import { FETCH_METHOD_SEARCH_TAG } from "../../Constants/constants";
 
 const NoteBodySection = (props) => {
     const { content } = props
@@ -21,9 +20,7 @@ const NoteBodySection = (props) => {
 }
 
 const TagSection = (props) => {
-    const { tags } = props;
-
-    const navigate = useNavigate();
+    const { tags, onTagClick } = props;
 
     const style = {
         "marginTop": 2,
@@ -41,8 +38,7 @@ const TagSection = (props) => {
         >
             {tags.map((tag) =>
                 <Chip key={tag.id} size="small" label={tag.name} onClick={() => {
-                    navigate(`/${NOTE_URL}/search/${FETCH_METHOD_SEARCH_TAG}?query=${tag.name}`);
-                    navigate(0);
+                    onTagClick?.(tag.name);
                 }} />
             )}
         </Stack>
@@ -77,20 +73,6 @@ const ActionButtonSection = (props) => {
         </Stack>
     )
 }
-// <Grid2 xs={12} md={6} lg={4} xl={3} key={noteId}>
-//     <Card variant="outlined">
-//         <CardActionArea sx={{ padding: 2 }} onClick={() => { navigate(`/${NOTE_URL}/${noteId}`); }}>
-//             <CardHeader title={title} action={<ActionButtonSection noteList={noteList} setNoteList={setNoteList} noteId={noteId} />}>
-//             </CardHeader>
-//             <CardContent>
-//                 <Stack spacing={2}>
-//                     <NoteBodySection content={content} />
-//                     <TagSection tags={tags} />
-//                 </Stack>
-//             </CardContent>
-//         </CardActionArea>
-//     </Card>
-// </Grid2>
 
 function dateHandler(localDateTime) {
     const dateObj = new Date(localDateTime);
@@ -100,7 +82,7 @@ function dateHandler(localDateTime) {
 
 
 export default function Notes(props) {
-    const { noteList, setNoteList, lastNoteRef } = props;
+    const { noteList, setNoteList, lastNoteRef, onTagClick } = props;
     const navigate = useNavigate();
 
     return (
@@ -121,9 +103,9 @@ export default function Notes(props) {
                                 <CardContent>
                                     <Stack spacing={2}>
                                         <NoteBodySection content={content} />
-                                        <TagSection tags={tags} />
+                                        <TagSection tags={tags} onTagClick={onTagClick} />
                                         <Typography variant="h7">Created: {dateHandler(note.creationTimestamp)}</Typography>
-                                        <Typography variant="h7">Last opened: {dateHandler(note.lastOpenTimestamp)}</Typography>
+                                        <Typography variant="h7">Opened: {dateHandler(note.lastOpenTimestamp)}</Typography>
                                     </Stack>
                                 </CardContent>
                             </CardActionArea>

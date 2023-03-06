@@ -12,7 +12,6 @@ export default function useNoteList(fetchMethod, query, page) {
     }, [query])
 
     useEffect(() => {
-        if (isLoading) return;
         setIsLoading(true);
     
         const url = `${process.env.REACT_APP_BACKEND_URL}/${NOTE_API_URL}/search${fetchMethod ? `/${fetchMethod}` : ''}?${query ? `query=${query}&` : ''}page=${page}&size=${GET_NOTE_LIST_PAGE_SIZE}&sort=${GET_NOTE_LIST_SORT}`
