@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { NOTE_API_URL } from "../../../Constants/endpoints";
 import { GET_NOTE_LIST_PAGE_SIZE, GET_NOTE_LIST_SORT } from '../../../Constants/constants';
+import { type } from '@testing-library/user-event/dist/type';
 
 export default function useNoteList(fetchMethod, query, page) {
     const [noteList, setNoteList] = useState([]);
@@ -24,7 +25,7 @@ export default function useNoteList(fetchMethod, query, page) {
             .then(response => response.json())
             .then(data => {
                 setNoteList(prevNoteList => {
-                    if (!data.content) return
+                    if (!data.content) return;
                     return [...prevNoteList, ...data.content];
                 });
                 setHasMore(data.totalPages > page);

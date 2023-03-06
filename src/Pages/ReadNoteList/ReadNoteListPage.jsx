@@ -1,5 +1,7 @@
 import Notes from './Notes';
 import useNoteList from './utils/useNoteList';
+import useTagList from './utils/useTagList';
+import TagListSuggestion from './TagListSuggestion';
 
 import { TextField, Grid } from '@mui/material';
 import React, { useState, useEffect, useRef, useCallback } from 'react';
@@ -14,9 +16,17 @@ export default function ReadNoteListPage(props) {
 
     const { noteList, isLoading, hasMore } = useNoteList(fetchMethod, query, page);
 
+    const { tagList } = useTagList(query);
+
     const handleInputChange = (event) => {
         setInputValue(event.target.value);
     };
+    
+    function onTagClick(query) {
+        setFetchMethod('tag');
+        setQuery(query);
+        setPage(0);
+    }
 
     const observer = useRef();
     const lastNoteRef = useCallback((node) => {
@@ -80,15 +90,13 @@ export default function ReadNoteListPage(props) {
                         onChange={handleInputChange} />
                 </Grid>
 
+                <TagListSuggestion tagList={tagList} onTagClick={onTagClick} />
+
             </Grid>
 
 
             <Grid container>
-                <Notes noteList={noteList} lastNoteRef={lastNoteRef} onTagClick={(query) => {
-                    setFetchMethod('tag');
-                    setQuery(query);
-                    setPage(0);
-                }}/>
+                <Notes noteList={noteList} lastNoteRef={lastNoteRef} onTagClick={onTagClick}/>
             </Grid>
             <Grid>
                 {isLoading ? <p>Loading...</p> : <p>Loading finished</p>}

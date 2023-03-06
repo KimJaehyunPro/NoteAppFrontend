@@ -27,7 +27,6 @@ const TagSection = (props) => {
         "width": "fit-content"
     };
 
-
     return (
         <Stack direction="row" spacing={1} sx={style}
             onMouseDown={event => event.stopPropagation()}
