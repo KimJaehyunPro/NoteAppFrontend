@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { NOTE_API_URL } from "../../../Constants/endpoints";
 import { GET_NOTE_LIST_PAGE_SIZE, GET_NOTE_LIST_SORT } from '../../../Constants/constants';
-import { type } from '@testing-library/user-event/dist/type';
 
 export default function useNoteList(fetchMethod, query, page) {
     const [noteList, setNoteList] = useState([]);
@@ -9,8 +8,10 @@ export default function useNoteList(fetchMethod, query, page) {
     const [hasMore, setHasMore] = useState(false);
 
     useEffect(() => {
-        setNoteList([]);
-    }, [query])
+        if (page === 0) {
+            setNoteList([]);
+        }
+    }, [query, page])
 
     useEffect(() => {
         setIsLoading(true);
@@ -39,8 +40,6 @@ export default function useNoteList(fetchMethod, query, page) {
                 abortController.abort();
             };
     }, [fetchMethod, query, page])
- 
-    
 
     return {noteList, isLoading, hasMore}
 }

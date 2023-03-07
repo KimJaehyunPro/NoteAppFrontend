@@ -11,11 +11,9 @@ export default function ReadNoteListPage(props) {
     const [fetchMethod, setFetchMethod] = useState('');
     const [inputValue, setInputValue] = useState('');
     const [query, setQuery] = useState('');
-
     const [page, setPage] = useState(0);
 
     const { noteList, isLoading, hasMore } = useNoteList(fetchMethod, query, page);
-
     const { tagList } = useTagList(query);
 
     const handleInputChange = (event) => {
