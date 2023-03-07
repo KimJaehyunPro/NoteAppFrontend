@@ -1,4 +1,4 @@
-import { Paper, Typography, Button, Stack } from "@mui/material";
+import { Paper, Typography, Button, Stack, Grid } from "@mui/material";
 import { useParams } from "react-router-dom";
 import * as React from 'react';
 
@@ -6,17 +6,19 @@ import ReactMarkdown from 'react-markdown';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 
 import useNote from "../../Hooks/useNote";
+import useDeleteNoteRequest from "../../Hooks/useDeleteNoteRequest";
+
 import { UPDATE_NOTE_URL } from "../../Constants/endpoints";
 
-import useDeleteNoteRequest from "../../Hooks/useDeleteNoteRequest";
+import TagSection from "../ReadNoteList/TagSection";
+import dateHandler from "../utils/dateHandler";
 
 import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
 import BorderColorRoundedIcon from '@mui/icons-material/BorderColorRounded';
 
-
 export default function ReadNotePage(props) {
     const { noteId } = useParams();
-    const [title, content] = useNote(noteId);
+    const { title, content, tags, creationTimestamp, lastOpenTimestamp } = useNote(noteId);
 
     const deleteNoteRequest = useDeleteNoteRequest();
 
@@ -25,7 +27,7 @@ export default function ReadNotePage(props) {
     }
 
     return (
-        <Paper elevation={3} sx={{ border: 1, padding: 4, borderColor: "blue"}}>
+        <Paper elevation={3} sx={{ border: 1, padding: 4, borderColor: "black" }}>
             <Stack spacing={3}>
                 <Typography variant="h3">{title}</Typography>
 
@@ -50,7 +52,7 @@ export default function ReadNotePage(props) {
                                 ) : (
                                     <SyntaxHighlighter
                                         children={children}
-                                        wrapLines={wrapLines} 
+                                        wrapLines={wrapLines}
                                         lineProps={lineProps}
                                         {...props}
                                     />
@@ -58,6 +60,13 @@ export default function ReadNotePage(props) {
                             }
                         }}
                     />
+
+                    <TagSection tags={tags} />
+
+                    <Grid container direction="column" alignContent="flex-end">
+                        <Typography>Created: {dateHandler(creationTimestamp)}</Typography>
+                        <Typography>Opened: {dateHandler(lastOpenTimestamp)}</Typography>   
+                    </Grid>
 
                     <Stack direction="row" justifyContent="flex-end" spacing={1}>
                         <Button style={buttonStyle} color="secondary" variant="outlined" href={`../${UPDATE_NOTE_URL}/${noteId}`} startIcon={<BorderColorRoundedIcon />}>Edit</Button>

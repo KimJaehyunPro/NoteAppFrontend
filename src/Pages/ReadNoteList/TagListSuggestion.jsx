@@ -1,4 +1,4 @@
-import { Chip } from "@mui/material";
+import { Grid, Chip } from "@mui/material";
 
 export default function TagListSuggestion(props) {
 
@@ -9,11 +9,11 @@ export default function TagListSuggestion(props) {
             {tagList.map((tag) => {
 
                 return (
-                    <Chip key={tag.id} size="small" label={tag.name} onClick={() => {
+                    <Chip key={tag.id} size="small" label={tag.name} sx={{marginLeft: 2}} onClick={() => {
                         onTagClick?.(tag.name);
                     }} />
                 );
-                
+
             })}
         </div>
     );

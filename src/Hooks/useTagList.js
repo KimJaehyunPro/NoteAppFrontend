@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { TAG_API_URL } from "../../../Constants/endpoints";
+import { TAG_API_URL } from "../Constants/endpoints";
 
 export default function useTagList(query) {
 
@@ -17,7 +17,7 @@ export default function useTagList(query) {
                 });
                 return data.content;
             })
-    }, [query])
+    }, [query, url])
 
     return { tagList };
 }

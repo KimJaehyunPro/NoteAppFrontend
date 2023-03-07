@@ -1,12 +1,14 @@
-import useDeleteNoteRequest from "../../Hooks/useDeleteNoteRequest";
-import { UPDATE_NOTE_URL } from "../../Constants/endpoints";
+import { NOTE_URL, UPDATE_NOTE_URL } from "../../Constants/endpoints";
 
-import { Chip, Stack, Grid, Typography, Card, CardActionArea, CardHeader, CardContent, IconButton } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+
+import { Stack, Grid, Typography, Card, CardActionArea, CardHeader, CardContent, IconButton } from "@mui/material";
 import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
 import BorderColorRoundedIcon from '@mui/icons-material/BorderColorRounded';
 
-import { useNavigate } from "react-router-dom";
-import { NOTE_URL } from "../../Constants/endpoints";
+import dateHandler from "../utils/dateHandler";
+
+import TagSection from "./TagSection";
 
 const NoteBodySection = (props) => {
     const { content } = props
@@ -19,33 +21,9 @@ const NoteBodySection = (props) => {
     )
 }
 
-const TagSection = (props) => {
-    const { tags, onTagClick } = props;
-
-    const style = {
-        "marginTop": 2,
-        "width": "fit-content"
-    };
-
-    return (
-        <Stack direction="row" spacing={1} sx={style}
-            onMouseDown={event => event.stopPropagation()}
-            onClick={(event) => {
-                event.stopPropagation();
-                event.preventDefault();
-            }}
-        >
-            {tags.map((tag) =>
-                <Chip key={tag.id} size="small" label={tag.name} onClick={() => {
-                    onTagClick?.(tag.name);
-                }} />
-            )}
-        </Stack>
-    )
-}
-
 const ActionButtonSection = (props) => {
     const { noteId, onNoteDelete } = props;
+
     // const deleteNoteRequest = useDeleteNoteRequest();
     const navigate = useNavigate();
 
@@ -56,6 +34,7 @@ const ActionButtonSection = (props) => {
                 event.stopPropagation();
                 event.preventDefault();
             }}>
+
             <IconButton onClick={() => {
                 navigate(`/${UPDATE_NOTE_URL}/${noteId}`);
             }}>
@@ -70,15 +49,8 @@ const ActionButtonSection = (props) => {
     )
 }
 
-function dateHandler(localDateTime) {
-    const dateObj = new Date(localDateTime);
-    const formattedDate = dateObj.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' }) + ", " + dateObj.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
-    return formattedDate;
-}
-
-
 export default function Notes(props) {
-    const { noteList, lastNoteRef, onTagClick, onNoteDelete } = props;
+    const { noteList, lastNoteRef, onNoteDelete, onTagClick } = props;
     const navigate = useNavigate();
 
     return (
@@ -91,12 +63,14 @@ export default function Notes(props) {
                     <Grid item ref={isLastNote ? lastNoteRef : null} xs={12} md={6} lg={4} xl={3} key={noteId}>
                         <Card variant="outlined">
                             <CardActionArea sx={{ padding: 2 }} onClick={() => { navigate(`/${NOTE_URL}/${noteId}`); }}>
-                                <CardHeader title={title} action={<ActionButtonSection noteList={noteList} noteId={noteId} onNoteDelete={onNoteDelete} />}>
+                                <CardHeader title={title} action={<ActionButtonSection noteId={noteId} onNoteDelete={onNoteDelete} />}>
                                 </CardHeader>
                                 <CardContent>
                                     <Stack spacing={2}>
                                         <NoteBodySection content={content} />
-                                        <TagSection tags={tags} onTagClick={onTagClick} />
+                                        <Grid container justifyContent="right">
+                                            <TagSection tags={tags} onTagClick={onTagClick} />
+                                        </Grid>
                                         <Typography variant="h7">Created: {dateHandler(note.creationTimestamp)}</Typography>
                                         <Typography variant="h7">Opened: {dateHandler(note.lastOpenTimestamp)}</Typography>
                                     </Stack>

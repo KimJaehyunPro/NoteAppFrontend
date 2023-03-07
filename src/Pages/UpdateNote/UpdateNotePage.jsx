@@ -8,12 +8,12 @@ import * as React from 'react';
 export default function UpdateNotePage(props) {
     
     const { noteId } = useParams();
-    const [title, content, tags, isLoadingNote] = useNote(noteId);
+    const { title, content, tags, isLoading } = useNote(noteId);
 
     const updateNote = useUpdateNote();
 
     return (
-        isLoadingNote ?
+        isLoading ?
             <div>loading...</div> :
             <WriteNote
                 noteId={noteId}

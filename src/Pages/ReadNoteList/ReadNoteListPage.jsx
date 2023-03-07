@@ -1,11 +1,12 @@
 import Notes from './Notes';
-import useNoteList from './utils/useNoteList';
-import useTagList from './utils/useTagList';
 import TagListSuggestion from './TagListSuggestion';
 
-import { TextField, Grid } from '@mui/material';
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import useNoteList from '../utils/useNoteList';
+import useTagList from '../../Hooks/useTagList';
 import useDeleteNoteRequest from '../../Hooks/useDeleteNoteRequest';
+
+import { TextField, Grid, Typography } from '@mui/material';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 
 export default function ReadNoteListPage(props) {
 
@@ -17,7 +18,7 @@ export default function ReadNoteListPage(props) {
     const { noteList, setNoteList, isLoading, hasMore } = useNoteList(fetchMethod, query, page);
     const { tagList } = useTagList(query);
 
-    function onTagClick(query) {
+    const onTagClick = (query) => {
         setFetchMethod('tag');
         setQuery(query);
         setPage(0);
@@ -69,15 +70,16 @@ export default function ReadNoteListPage(props) {
     }, [inputValue]);
 
     return (
-        <Grid container spacing={2}>
+        <Grid container spacing={5}>
             <Grid
                 container
-                spacing={0}
-                direction="column"
+                item
+                direction="row"
                 alignItems="center"
                 justifyContent="center"
+                spacing={2}
             >
-                <Grid container xs={12} md={8} lg={4} xl={3}>
+                <Grid item container xs={12} md={8} lg={4} xl={3}>
                     <TextField
                         id="note-search-input-field"
                         label="Search Notes"
@@ -88,14 +90,28 @@ export default function ReadNoteListPage(props) {
                         focused
                         onChange={handleInputChange} />
                 </Grid>
-                <TagListSuggestion tagList={tagList} onTagClick={onTagClick} />
+
+                <Grid item container>
+                    <Grid container justifyContent="center">
+                        <Typography>Recommended tags</Typography>
+                    </Grid>
+                    <Grid container justifyContent="center">
+                        <Grid container justifyContent="center" sx={{marginTop: 1}}>
+                            <TagListSuggestion tagList={tagList} onTagClick={onTagClick} />
+                        </Grid>
+                    </Grid>
+                </Grid>
+
             </Grid>
-            <Grid container>
-                <Notes noteList={noteList} lastNoteRef={lastNoteRef} onTagClick={onTagClick} onNoteDelete={onNoteDelete} />
+
+            <Grid container item>
+                <Notes noteList={noteList} lastNoteRef={lastNoteRef} onNoteDelete={onNoteDelete} tagList={tagList} onTagClick={onTagClick} />
             </Grid>
-            <Grid>
-                {isLoading ? <p>Loading...</p> : <p>Loading finished</p>}
+
+            <Grid container item>
+                {isLoading ? <p>Loading...</p> : <p></p>}
             </Grid>
+
         </Grid>
 
     );
