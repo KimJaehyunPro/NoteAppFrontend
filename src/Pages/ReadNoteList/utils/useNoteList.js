@@ -41,5 +41,5 @@ export default function useNoteList(fetchMethod, query, page) {
             };
     }, [fetchMethod, query, page])
 
-    return {noteList, isLoading, hasMore}
+    return {noteList, setNoteList, isLoading, hasMore}
 }

@@ -45,8 +45,8 @@ const TagSection = (props) => {
 }
 
 const ActionButtonSection = (props) => {
-    const { noteList, setNoteList, noteId } = props;
-    const deleteNoteRequest = useDeleteNoteRequest();
+    const { noteId, onNoteDelete } = props;
+    // const deleteNoteRequest = useDeleteNoteRequest();
     const navigate = useNavigate();
 
     return (
@@ -62,10 +62,7 @@ const ActionButtonSection = (props) => {
                 <BorderColorRoundedIcon />
             </IconButton>
             <IconButton onClick={() => {
-                deleteNoteRequest(noteId, () => {
-                    const noteListWithoutDeletedNote = noteList.filter(n => n.id !== noteId);
-                    setNoteList(noteListWithoutDeletedNote)
-                });
+                onNoteDelete(noteId);
             }}>
                 <DeleteRoundedIcon />
             </IconButton>
@@ -81,23 +78,20 @@ function dateHandler(localDateTime) {
 
 
 export default function Notes(props) {
-    const { noteList, setNoteList, lastNoteRef, onTagClick } = props;
+    const { noteList, lastNoteRef, onTagClick, onNoteDelete } = props;
     const navigate = useNavigate();
 
     return (
         <Grid container spacing={1}>
             {noteList.map((note, index) => {
-
                 const { id: noteId, title, content, tags } = note;
-
-
                 const isLastNote = ((index + 1) === noteList.length);
 
                 return (
                     <Grid item ref={isLastNote ? lastNoteRef : null} xs={12} md={6} lg={4} xl={3} key={noteId}>
                         <Card variant="outlined">
                             <CardActionArea sx={{ padding: 2 }} onClick={() => { navigate(`/${NOTE_URL}/${noteId}`); }}>
-                                <CardHeader title={title} action={<ActionButtonSection noteList={noteList} setNoteList={setNoteList} noteId={noteId} />}>
+                                <CardHeader title={title} action={<ActionButtonSection noteList={noteList} noteId={noteId} onNoteDelete={onNoteDelete} />}>
                                 </CardHeader>
                                 <CardContent>
                                     <Stack spacing={2}>

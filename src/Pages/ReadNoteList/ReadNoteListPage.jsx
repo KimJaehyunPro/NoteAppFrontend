@@ -5,6 +5,7 @@ import TagListSuggestion from './TagListSuggestion';
 
 import { TextField, Grid } from '@mui/material';
 import React, { useState, useEffect, useRef, useCallback } from 'react';
+import useDeleteNoteRequest from '../../Hooks/useDeleteNoteRequest';
 
 export default function ReadNoteListPage(props) {
 
@@ -13,13 +14,9 @@ export default function ReadNoteListPage(props) {
     const [query, setQuery] = useState('');
     const [page, setPage] = useState(0);
 
-    const { noteList, isLoading, hasMore } = useNoteList(fetchMethod, query, page);
+    const { noteList, setNoteList, isLoading, hasMore } = useNoteList(fetchMethod, query, page);
     const { tagList } = useTagList(query);
 
-    const handleInputChange = (event) => {
-        setInputValue(event.target.value);
-    };
-    
     function onTagClick(query) {
         setFetchMethod('tag');
         setQuery(query);
@@ -40,9 +37,19 @@ export default function ReadNoteListPage(props) {
         if (node) observer.current.observe(node);
     }, [isLoading, hasMore]);
 
-    // If it has been more than ? seconds since the user typed search input, trigger search
-    useEffect(() => {
+    const deleteNoteRequest = useDeleteNoteRequest();
+    function onNoteDelete(noteId) {
+        deleteNoteRequest(noteId, () => {
+            const newNoteList = noteList.filter(note => (note.id !== noteId));
+            setNoteList(newNoteList);
+        })
+    }
 
+    // If it has been more than ? seconds since the user typed search input, trigger search
+    const handleInputChange = (event) => {
+        setInputValue(event.target.value);
+    };
+    useEffect(() => {
         let timeout;
         if (inputValue !== '') {
             timeout = setTimeout(() => {
@@ -63,7 +70,6 @@ export default function ReadNoteListPage(props) {
 
     return (
         <Grid container spacing={2}>
-
             <Grid
                 container
                 spacing={0}
@@ -71,12 +77,7 @@ export default function ReadNoteListPage(props) {
                 alignItems="center"
                 justifyContent="center"
             >
-
-                <Grid container
-                    xs={12}
-                    md={8}
-                    lg={4}
-                    xl={3}>
+                <Grid container xs={12} md={8} lg={4} xl={3}>
                     <TextField
                         id="note-search-input-field"
                         label="Search Notes"
@@ -87,14 +88,10 @@ export default function ReadNoteListPage(props) {
                         focused
                         onChange={handleInputChange} />
                 </Grid>
-
                 <TagListSuggestion tagList={tagList} onTagClick={onTagClick} />
-
             </Grid>
-
-
             <Grid container>
-                <Notes noteList={noteList} lastNoteRef={lastNoteRef} onTagClick={onTagClick}/>
+                <Notes noteList={noteList} lastNoteRef={lastNoteRef} onTagClick={onTagClick} onNoteDelete={onNoteDelete} />
             </Grid>
             <Grid>
                 {isLoading ? <p>Loading...</p> : <p>Loading finished</p>}
