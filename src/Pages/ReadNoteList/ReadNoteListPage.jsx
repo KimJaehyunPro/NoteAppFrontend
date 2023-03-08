@@ -93,7 +93,7 @@ export default function ReadNoteListPage(props) {
 
                 <Grid item container>
                     <Grid container justifyContent="center">
-                        <Typography>Recommended tags</Typography>
+                        <Typography variant='h4'>Recommended tags</Typography>
                     </Grid>
                     <Grid container justifyContent="center">
                         <Grid container justifyContent="center" sx={{marginTop: 1}}>
