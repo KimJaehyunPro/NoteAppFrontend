@@ -12,13 +12,14 @@ import { UPDATE_NOTE_URL } from "../../Constants/endpoints";
 
 import TagSection from "../ReadNoteList/TagSection";
 import dateHandler from "../utils/dateHandler";
+import getDateDifference from "../utils/getDateDifference";
 
 import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
 import BorderColorRoundedIcon from '@mui/icons-material/BorderColorRounded';
 
 export default function ReadNotePage(props) {
     const { noteId } = useParams();
-    const { title, content, tags, creationTimestamp, lastOpenTimestamp } = useNote(noteId);
+    const { title, content, tags, creationTimestamp, lastOpenTimestamp, isLoading } = useNote(noteId);
 
     const deleteNoteRequest = useDeleteNoteRequest();
 
@@ -26,10 +27,17 @@ export default function ReadNotePage(props) {
         "borderRadius": "20px"
     }
 
+    React.useEffect(() => {
+        if (isLoading === false) {
+            console.log(`!!!!! isLoading useEffect triggered: ${isLoading}`);
+        }
+    }, [isLoading])
+
     return (
         <Paper elevation={3} sx={{ border: 1, padding: 4, borderColor: "black" }}>
             <Stack spacing={3}>
                 <Typography variant="h3">{title}</Typography>
+                <Typography sx={{"textAlign": "right"}}>Learnt {isLoading ? "Loading..." : getDateDifference(lastOpenTimestamp, noteId)} days ago.</Typography>   
 
                 <Stack spacing={3}>
                     <ReactMarkdown
@@ -65,7 +73,7 @@ export default function ReadNotePage(props) {
 
                     <Grid container direction="column" alignContent="flex-end">
                         <Typography>Created: {dateHandler(creationTimestamp)}</Typography>
-                        <Typography>Opened: {dateHandler(lastOpenTimestamp)}</Typography>   
+                        <Typography>Opened: {dateHandler(lastOpenTimestamp)}</Typography>
                     </Grid>
 
                     <Stack direction="row" justifyContent="flex-end" spacing={1}>

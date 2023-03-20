@@ -62,7 +62,7 @@ export default function Notes(props) {
                 return (
                     <Grid item ref={isLastNote ? lastNoteRef : null} xs={12} md={6} lg={4} xl={3} key={noteId}>
                         <Card variant="outlined">
-                            <CardActionArea sx={{ padding: 2 }} onClick={() => { navigate(`/${NOTE_URL}/${noteId}`); }}>
+                            <CardActionArea component="div" sx={{ padding: 2 }} onClick={() => { navigate(`/${NOTE_URL}/${noteId}`); }}>
                                 <CardHeader title={title} action={<ActionButtonSection noteId={noteId} onNoteDelete={onNoteDelete} />}>
                                 </CardHeader>
                                 <CardContent>

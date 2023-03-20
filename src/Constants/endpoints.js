@@ -3,5 +3,6 @@ export const NOTE_API_URL = `notes`
 export const CREATE_NOTE_URL = `${NOTE_URL}/create`
 export const UPDATE_NOTE_URL = `${NOTE_URL}/update`
 export const GET_RANDOM_ID_API_URL = `${NOTE_API_URL}/randomId`;
+export const UPDATE_LAST_OPEN_TIMESTAMP_API_URL = `${NOTE_API_URL}/updateLastOpenTimestamp`
 
 export const TAG_API_URL = `tags`
