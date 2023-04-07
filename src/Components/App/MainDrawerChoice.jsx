@@ -1,4 +1,5 @@
 import { List, ListItem, ListItemButton, ListItemText, Divider, Toolbar, ListItemIcon } from '@mui/material'
+import { LOGIN_URL } from '../../Constants/endpoints';
 
 import ImportContactsIcon from '@mui/icons-material/ImportContacts';
 import CreateIcon from '@mui/icons-material/Create';
@@ -21,6 +22,18 @@ export default function MainDrawerChoice(props) {
             
             <Toolbar />
             <Divider />
+
+            <List>
+                <ListItem key="Login">
+                    <ListItemButton href={`../${LOGIN_URL}`}>
+                        <ListItemIcon>
+                            <ImportContactsIcon />
+                        </ListItemIcon>
+
+                        <ListItemText primary="Login" />
+                    </ListItemButton>
+                </ListItem>
+            </List>
 
             <List>
                 <ListItem key="ShowAllNotes">

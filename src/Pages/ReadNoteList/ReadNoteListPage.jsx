@@ -9,7 +9,7 @@ import { TextField, Grid, Typography } from '@mui/material';
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 
 export default function ReadNoteListPage(props) {
-
+    
     const [fetchMethod, setFetchMethod] = useState('');
     const [inputValue, setInputValue] = useState('');
     const [query, setQuery] = useState('');

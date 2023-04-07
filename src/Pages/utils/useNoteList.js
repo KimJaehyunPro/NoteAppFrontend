@@ -13,16 +13,23 @@ export default function useNoteList(fetchMethod, query, page) {
         }
     }, [query, page])
 
+    const username = "testUser1";
+    const password = "123";
+
     useEffect(() => {
+        if (!JWSToken) return;
         setIsLoading(true);
-    
+
         const url = `${process.env.REACT_APP_BACKEND_URL}/${NOTE_API_URL}/search${fetchMethod ? `/${fetchMethod}` : ''}?${query ? `query=${query}&` : ''}page=${page}&size=${GET_NOTE_LIST_PAGE_SIZE}&sort=${GET_NOTE_LIST_SORT}`
         const abortController = new AbortController();
 
-        fetch(url, 
-          {
-            signal: abortController.signal,
-          })
+        fetch(url,
+            {
+                signal: abortController.signal,
+                headers: {
+                    'Authorization': `Bearer ${JWSToken}`
+                }
+            })
             .then(response => response.json())
             .then(data => {
                 setNoteList(prevNoteList => {
@@ -36,10 +43,10 @@ export default function useNoteList(fetchMethod, query, page) {
                 console.log(`Unexpected error: ${error}`)
             })
 
-            return () => {
-                abortController.abort();
-            };
-    }, [fetchMethod, query, page])
+        return () => {
+            abortController.abort();
+        };
+    }, [fetchMethod, query, page, JWSToken])
 
-    return {noteList, setNoteList, isLoading, hasMore}
+    return { noteList, setNoteList, isLoading, hasMore }
 }
