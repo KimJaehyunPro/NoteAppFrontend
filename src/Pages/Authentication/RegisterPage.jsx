@@ -10,6 +10,8 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 
+import { LOGIN_URL } from '../../Constants/endpoints';
+
 function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
@@ -72,7 +74,6 @@ export default function RegisterPage() {
                   label="Password"
                   type="password"
                   id="password"
-                  autoComplete="new-password"
                 />
               </Grid>
               <Grid item xs={12}>
@@ -83,7 +84,6 @@ export default function RegisterPage() {
                   label="Confirmation"
                   type="password"
                   id="confirmation"
-                  autoComplete="new-password"
                 />
               </Grid>
             </Grid>
@@ -93,11 +93,11 @@ export default function RegisterPage() {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Sign Up
+              Register
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link href={`../${LOGIN_URL}`} variant="body2">
                   Already have an account? Sign in
                 </Link>
               </Grid>
