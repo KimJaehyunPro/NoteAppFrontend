@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import getJWSToken from "../utils/getJWSToken";
 
+import { REGISTER_API_URL } from "../../Constants/endpoints";
+
 import * as React from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
@@ -106,7 +108,7 @@ export default function LoginPage() {
                     </Link>
                     </Grid>
                     <Grid item>
-                    <Link href="#" variant="body2">
+                    <Link href={`../${REGISTER_API_URL}`} variant="body2">
                         {"Don't have an account? Sign Up"}
                     </Link>
                     </Grid>
