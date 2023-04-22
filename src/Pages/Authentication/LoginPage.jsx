@@ -29,13 +29,8 @@ export default function LoginPage() {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
 
-        const fetchToken = () => {
-            return getJWSToken(data.get('username'), data.get('password'));
-        };
-
-        fetchToken().then(data => {
-            setJWSToken(data.accessToken);
-        })
+        const token = getJWSToken(data.get('username'), data.get('password'));
+        setJWSToken(token.accessToken);
     };
 
     return (
