@@ -12,19 +12,6 @@ import Container from '@mui/material/Container';
 
 import { LOGIN_URL } from '../../Constants/endpoints';
 
-function Copyright(props) {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
-
 export default function RegisterPage() {
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -104,7 +91,6 @@ export default function RegisterPage() {
             </Grid>
           </Box>
         </Box>
-        <Copyright sx={{ mt: 5 }} />
       </Container>
   );
 }
