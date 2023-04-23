@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import getJWSToken from "../utils/getJWSToken";
 
-import { REGISTER_API_URL } from "../../Constants/endpoints";
+import { NOTE_URL, REGISTER_API_URL } from "../../Constants/endpoints";
 
 import * as React from 'react';
 import Avatar from '@mui/material/Avatar';
@@ -16,6 +16,7 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
+import { Navigate } from "react-router-dom";
 
 export default function LoginPage() {
 
@@ -31,6 +32,9 @@ export default function LoginPage() {
 
         const token = getJWSToken(data.get('username'), data.get('password'));
         setJWSToken(token.accessToken);
+
+        const navigate = new Navigate();
+        navigate(`${NOTE_URL}/foo`);
     };
 
     return (

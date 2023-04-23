@@ -16,7 +16,11 @@ export default function useNoteList(fetchMethod, query, page) {
     const username = "testUser1";
     const password = "123";
 
+    const tokenType = localStorage.getItem("tokenType");
+    const JWSToken = localStorage.getItem("accessToken");
+
     useEffect(() => {
+
         if (!JWSToken) return;
         setIsLoading(true);
 
@@ -27,7 +31,11 @@ export default function useNoteList(fetchMethod, query, page) {
             {
                 signal: abortController.signal,
                 headers: {
-                    'Authorization': `Bearer ${JWSToken}`
+                    'Authorization': `${tokenType} ${JWSToken}`
+                },
+                body: {
+                    "username": username,
+                    "password": password
                 }
             })
             .then(response => response.json())
