@@ -1,4 +1,4 @@
-import { Grid, Chip } from "@mui/material";
+import { Chip } from "@mui/material";
 
 export default function TagListSuggestion(props) {
 
