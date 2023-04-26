@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import getJWSToken from "../utils/getJWSToken";
 
 import { NOTE_URL, REGISTER_API_URL } from "../../Constants/endpoints";
@@ -16,25 +16,31 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 
 export default function LoginPage() {
 
     const [JWSToken, setJWSToken] = useState(null);
 
-    useEffect(() => {
-        
-    }, [JWSToken]);
+    const navigate = useNavigate();
 
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
 
         const token = getJWSToken(data.get('username'), data.get('password'));
-        setJWSToken(token.accessToken);
 
-        const navigate = new Navigate();
-        navigate(`${NOTE_URL}/foo`);
+        token.then((data) => {
+            const accessToken = data.accessToken;
+            setJWSToken(accessToken);
+
+            if (accessToken) {
+                navigate(`../../${NOTE_URL}`);
+            }
+        }).catch(error => {
+            alert("Wrong username or password.");
+        })
+
     };
 
     return (

@@ -27,12 +27,6 @@ export default function ReadNotePage(props) {
         "borderRadius": "20px"
     }
 
-    React.useEffect(() => {
-        if (isLoading === false) {
-            console.log(`!!!!! isLoading useEffect triggered: ${isLoading}`);
-        }
-    }, [isLoading])
-
     return (
         <Paper elevation={3} sx={{ border: 1, padding: 4, borderColor: "black" }}>
             <Stack spacing={3}>
