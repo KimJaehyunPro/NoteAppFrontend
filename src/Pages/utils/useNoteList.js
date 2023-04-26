@@ -42,7 +42,7 @@ export default function useNoteList(fetchMethod, query, page) {
                 setIsLoading(false);
             }).catch((error) => {
                 if (abortController.signal.aborted) return;
-                console.log(`Unexpected error: ${error}`)
+                console.log(`Unexpected error: ${error}`);
             })
 
         return () => {
