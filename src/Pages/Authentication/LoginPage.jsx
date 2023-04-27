@@ -1,4 +1,3 @@
-import { useState } from "react";
 import getJWSToken from "../utils/getJWSToken";
 
 import { NOTE_URL, REGISTER_API_URL } from "../../Constants/endpoints";
@@ -16,11 +15,9 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function LoginPage() {
-
-    const [JWSToken, setJWSToken] = useState(null);
 
     const navigate = useNavigate();
 
@@ -32,7 +29,6 @@ export default function LoginPage() {
 
         token.then((data) => {
             const accessToken = data.accessToken;
-            setJWSToken(accessToken);
 
             if (accessToken) {
                 navigate(`../../${NOTE_URL}`);
