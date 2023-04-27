@@ -1,7 +1,7 @@
 import { LOGIN_API_URL } from '../../Constants/endpoints';
 import axios from 'axios';
 
-export default function getJWSToken(username, password) {
+export default function getJWT(username, password) {
     return axios
         .post(`${process.env.REACT_APP_BACKEND_URL}/${LOGIN_API_URL}`, {
             username,

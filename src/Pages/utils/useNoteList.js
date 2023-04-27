@@ -14,11 +14,11 @@ export default function useNoteList(fetchMethod, query, page) {
     }, [query, page])
 
     const tokenType = sessionStorage.getItem("tokenType");
-    const JWSToken = sessionStorage.getItem("accessToken");
+    const token = sessionStorage.getItem("accessToken");
 
     useEffect(() => {
 
-        if (!JWSToken) return;
+        if (!token) return;
         setIsLoading(true);
 
         const url = `${process.env.REACT_APP_BACKEND_URL}/${NOTE_API_URL}/search${fetchMethod ? `/${fetchMethod}` : ''}?${query ? `query=${query}&` : ''}page=${page}&size=${GET_NOTE_LIST_PAGE_SIZE}&sort=${GET_NOTE_LIST_SORT}`
@@ -29,7 +29,7 @@ export default function useNoteList(fetchMethod, query, page) {
                 signal: abortController.signal,
                 method: 'GET',
                 headers: {
-                    'Authorization': `${tokenType}${JWSToken}`
+                    'Authorization': `${tokenType}${token}`
                 }
             })
             .then(response => response.json())
@@ -48,7 +48,7 @@ export default function useNoteList(fetchMethod, query, page) {
         return () => {
             abortController.abort();
         };
-    }, [fetchMethod, query, page, JWSToken])
+    }, [fetchMethod, query, page, token])
 
     return { noteList, setNoteList, isLoading, hasMore }
 }

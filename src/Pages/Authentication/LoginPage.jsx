@@ -1,5 +1,3 @@
-import getJWSToken from "../utils/getJWSToken";
-
 import { NOTE_URL, REGISTER_API_URL } from "../../Constants/endpoints";
 
 import * as React from 'react';
@@ -16,6 +14,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { useNavigate } from "react-router-dom";
+import getJWT from "../utils/getJWT";
 
 export default function LoginPage() {
 
@@ -25,7 +24,7 @@ export default function LoginPage() {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
 
-        const token = getJWSToken(data.get('username'), data.get('password'));
+        const token = getJWT(data.get('username'), data.get('password'));
 
         token.then((data) => {
             const accessToken = data.accessToken;
