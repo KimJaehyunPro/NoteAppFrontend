@@ -19,7 +19,7 @@ export default function ReadNoteListPage(props) {
         if (!isLoggedIn) {
             navigate(`../${LOGIN_URL}`);
         }
-    }, [])
+    }, [navigate, isLoggedIn])
     
     const [fetchMethod, setFetchMethod] = useState('');
     const [inputValue, setInputValue] = useState('');
