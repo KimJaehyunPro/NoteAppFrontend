@@ -7,8 +7,19 @@ import useDeleteNoteRequest from '../../Hooks/useDeleteNoteRequest';
 
 import { TextField, Grid, Typography } from '@mui/material';
 import React, { useState, useEffect, useRef, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { LOGIN_URL } from '../../Constants/endpoints';
 
 export default function ReadNoteListPage(props) {
+
+    const navigate = useNavigate();
+
+    const isLoggedIn = (sessionStorage.getItem("tokenType"));
+    React.useEffect(() => {
+        if (!isLoggedIn) {
+            navigate(`../${LOGIN_URL}`);
+        }
+    }, [])
     
     const [fetchMethod, setFetchMethod] = useState('');
     const [inputValue, setInputValue] = useState('');
