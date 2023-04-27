@@ -11,6 +11,8 @@ import { LOGIN_URL, NOTE_URL } from '../../Constants/endpoints';
 
 export default function RandomNoteTab(props) {
 
+    const randomId = useRandomId();
+
     const navigate = useNavigate();
 
     const isLoggedIn = (sessionStorage.getItem("tokenType"));
@@ -18,9 +20,7 @@ export default function RandomNoteTab(props) {
         if (!isLoggedIn) {
             navigate(`../${LOGIN_URL}`);
         }
-    }, [navigate, isLoggedIn])
-
-    const randomId = useRandomId();
+    }, [isLoggedIn])
     
     return (
         <List>
