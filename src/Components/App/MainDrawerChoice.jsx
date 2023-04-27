@@ -5,6 +5,7 @@ import ImportContactsIcon from '@mui/icons-material/ImportContacts';
 import CreateIcon from '@mui/icons-material/Create';
 
 import * as React from 'react';
+import RandomNoteTab from '../ListTabs/RandomNoteTab';
 
 export default function MainDrawerChoice(props) {
     return (
@@ -49,6 +50,7 @@ export default function MainDrawerChoice(props) {
                 </ListItem>
             </List>
 
+            <RandomNoteTab/>
 
         </div>
     )

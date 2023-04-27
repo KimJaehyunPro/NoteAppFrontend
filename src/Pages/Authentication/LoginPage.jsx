@@ -1,5 +1,7 @@
 import { NOTE_URL, REGISTER_API_URL } from "../../Constants/endpoints";
 
+import getJWT from "../utils/getJWT";
+
 import * as React from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
@@ -14,7 +16,6 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { useNavigate } from "react-router-dom";
-import getJWT from "../utils/getJWT";
 
 export default function LoginPage() {
 
