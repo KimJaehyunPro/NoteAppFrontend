@@ -9,7 +9,8 @@ export default function CreateNotePage(props) {
 
     const navigate = useNavigate();
 
-    const isLoggedIn = (sessionStorage.getItem("tokenType"));
+    const tokenType = sessionStorage.getItem("tokenType");
+    const isLoggedIn = (tokenType != null);
     React.useEffect(() => {
         if (!isLoggedIn) {
             navigate(`../${LOGIN_URL}`);

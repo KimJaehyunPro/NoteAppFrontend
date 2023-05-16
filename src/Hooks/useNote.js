@@ -12,12 +12,12 @@ export default function useNote(noteId) {
     const [isLoading, setIsLoading] = React.useState(true);
 
     const tokenType = sessionStorage.getItem("tokenType");
-    const token = sessionStorage.getItem("accessToken");
+    const accessToken = sessionStorage.getItem("accessToken");
 
     React.useEffect(() => {
         fetch(`${process.env.REACT_APP_BACKEND_URL}/${NOTE_API_URL}/${noteId}`, {
             headers: {
-                'Authorization': `${tokenType}${token}`
+                'Authorization': `${tokenType}${accessToken}`
             }
         })
             .then(response => response.json())
