@@ -1,5 +1,5 @@
 import { List, ListItem, ListItemButton, ListItemText, Divider, Toolbar, ListItemIcon } from '@mui/material'
-import { LOGIN_URL } from '../../Constants/endpoints';
+import { CREATE_NOTE_URL, LOGIN_URL, NOTE_URL } from '../../Constants/endpoints';
 
 import ImportContactsIcon from '@mui/icons-material/ImportContacts';
 import CreateIcon from '@mui/icons-material/Create';
@@ -54,7 +54,7 @@ export default function MainDrawerChoice(props) {
             )}
             <List>
                 <ListItem key="ShowAllNotes">
-                    <ListItemButton href="/notes">
+                    <ListItemButton href={`/${NOTE_URL}`}>
                         <ListItemIcon>
                             <ImportContactsIcon />
                         </ListItemIcon>
@@ -66,7 +66,7 @@ export default function MainDrawerChoice(props) {
 
             <List>
                 <ListItem key="Write Note">
-                    <ListItemButton href="/notes/create">
+                    <ListItemButton href={`/${CREATE_NOTE_URL}`}>
                         <ListItemIcon>
                             <CreateIcon />
                         </ListItemIcon>
