@@ -24,7 +24,6 @@ const NoteBodySection = (props) => {
 const ActionButtonSection = (props) => {
     const { noteId, onNoteDelete } = props;
 
-    // const deleteNoteRequest = useDeleteNoteRequest();
     const navigate = useNavigate();
 
     return (

@@ -52,32 +52,50 @@ export default function MainDrawerChoice(props) {
                 </ListItem>
             </List>
             )}
-            <List>
-                <ListItem key="ShowAllNotes">
-                    <ListItemButton href={`/${NOTE_URL}`}>
-                        <ListItemIcon>
-                            <ImportContactsIcon />
-                        </ListItemIcon>
 
-                        <ListItemText primary="Show All Notes" />
-                    </ListItemButton>
-                </ListItem>
-            </List>
+            {isLoggedIn?
 
-            <List>
-                <ListItem key="Write Note">
-                    <ListItemButton href={`/${CREATE_NOTE_URL}`}>
-                        <ListItemIcon>
-                            <CreateIcon />
-                        </ListItemIcon>
+                <List>
+                    <ListItem key="ShowAllNotes">
+                        <ListItemButton href={`/${NOTE_URL}`}>
+                            <ListItemIcon>
+                                <ImportContactsIcon />
+                            </ListItemIcon>
 
-                        <ListItemText primary="Write Note" />
-                    </ListItemButton>
-                </ListItem>
-            </List>
+                            <ListItemText primary="Show All Notes" />
+                        </ListItemButton>
+                    </ListItem>
+                </List>
 
-            <RandomNoteTab/>
+                :
 
+                ""
+            }
+
+            {isLoggedIn ?
+            
+                <List>
+                    <ListItem key="Write Note">
+                        <ListItemButton href={`/${CREATE_NOTE_URL}`}>
+                            <ListItemIcon>
+                                <CreateIcon />
+                            </ListItemIcon>
+
+                            <ListItemText primary="Write Note" />
+                        </ListItemButton>
+                    </ListItem>
+                </List>
+
+                :
+
+                ""
+            }
+
+            { isLoggedIn ?
+                <RandomNoteTab/>
+                :
+                ""
+            }
         </div>
     )
 }

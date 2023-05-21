@@ -7,7 +7,7 @@ import useRandomId from '../../Hooks/useRandomId';
 import AnalyticsIcon from '@mui/icons-material/Analytics';
 
 import { List, ListItem, ListItemButton, ListItemText,ListItemIcon } from '@mui/material'
-import { LOGIN_URL, NOTE_URL } from '../../Constants/endpoints';
+import { NOTE_URL } from '../../Constants/endpoints';
 
 export default function RandomNoteTab(props) {
 
@@ -15,19 +15,12 @@ export default function RandomNoteTab(props) {
 
     const randomId = useRandomId();
 
-    const isLoggedIn = (sessionStorage.getItem("accessToken") != null);
-
     return (
-        isLoggedIn ? 
             <List>
                 <ListItem key="Random" >
                     <ListItemButton onClick={() => {
                         randomId().then(randomId => {
-                            if (isLoggedIn) {
-                                navigate(`${NOTE_URL}/${randomId}`);
-                            } else {
-                                navigate(`../${LOGIN_URL}`);
-                            }
+                            navigate(`${NOTE_URL}/${randomId}`);
                         })
                     }}>
                         <ListItemIcon>
@@ -38,7 +31,5 @@ export default function RandomNoteTab(props) {
                     </ListItemButton>
                 </ListItem>
             </List>
-            
-            : null
     )
 }
