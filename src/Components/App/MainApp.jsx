@@ -9,6 +9,7 @@ import ReadNotePage from '../../Pages/ReadNote/ReadNotePage';
 import UpdateNotePage from '../../Pages/UpdateNote/UpdateNotePage';
 import LoginPage from '../../Pages/Authentication/LoginPage';
 import RegisterPage from '../../Pages/Authentication/RegisterPage';
+import RevisionPage from '../../Pages/Revision/RevisionPage';
 
 export default function MainApp(props) {
   
@@ -20,6 +21,10 @@ export default function MainApp(props) {
         {
           path: `/${NOTE_URL}`,
           element: <ReadNoteListPage />
+        },
+        {
+          path: `/${NOTE_URL}/revision`,
+          element: <RevisionPage/>
         },
         {
           path: `${NOTE_URL}/:noteId`,

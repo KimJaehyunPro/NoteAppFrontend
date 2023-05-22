@@ -1,5 +1,5 @@
 import { List, ListItem, ListItemButton, ListItemText, Divider, Toolbar, ListItemIcon } from '@mui/material'
-import { CREATE_NOTE_URL, LOGIN_URL, NOTE_URL } from '../../Constants/endpoints';
+import { CREATE_NOTE_URL, LOGIN_URL, NOTE_URL, REVISION_URL } from '../../Constants/endpoints';
 
 import ImportContactsIcon from '@mui/icons-material/ImportContacts';
 import CreateIcon from '@mui/icons-material/Create';
@@ -53,7 +53,23 @@ export default function MainDrawerChoice(props) {
             </List>
             )}
 
-            {isLoggedIn?
+            {isLoggedIn ?
+
+            <List>
+                <ListItem key="Revision">
+                    <ListItemButton href={`../${REVISION_URL}`}>
+                        <ListItemIcon>
+                            <ImportContactsIcon />
+                        </ListItemIcon>
+
+                        <ListItemText primary="Revision" />
+                    </ListItemButton>
+                </ListItem>
+            </List>
+
+            : ""}
+
+            {isLoggedIn ?
 
                 <List>
                     <ListItem key="ShowAllNotes">
@@ -96,6 +112,7 @@ export default function MainDrawerChoice(props) {
                 :
                 ""
             }
+
         </div>
     )
 }

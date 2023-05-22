@@ -1,4 +1,5 @@
 export const NOTE_URL = `notes`;
+export const REVISION_URL = `${NOTE_URL}/revision`;
 export const CREATE_NOTE_URL = `${NOTE_URL}/create`;
 export const UPDATE_NOTE_URL = `${NOTE_URL}/update`;
 
