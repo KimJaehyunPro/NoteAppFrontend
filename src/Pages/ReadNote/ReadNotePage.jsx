@@ -2,9 +2,6 @@ import { Paper, Typography, Button, Stack, Grid } from "@mui/material";
 import { useParams } from "react-router-dom";
 import * as React from 'react';
 
-import ReactMarkdown from 'react-markdown';
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-
 import useNote from "../../Hooks/useNote";
 import useDeleteNoteRequest from "../../Hooks/useDeleteNoteRequest";
 
@@ -16,6 +13,7 @@ import getDateDifference from "../utils/getDateDifference";
 
 import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
 import BorderColorRoundedIcon from '@mui/icons-material/BorderColorRounded';
+import ReadNoteMarkdown from "./ReadNoteMarkdown";
 
 export default function ReadNotePage(props) {
     const { noteId } = useParams();
@@ -34,34 +32,7 @@ export default function ReadNotePage(props) {
                 <Typography sx={{"textAlign": "right"}}>Learnt {isLoading ? "Loading..." : getDateDifference(lastOpenTimestamp, noteId)} days ago.</Typography>   
 
                 <Stack spacing={3}>
-                    <ReactMarkdown
-                        children={content}
-                        components={{
-                            code({ node, inline, className, children, ...props }) {
-                                const match = /language-(\w+)/.exec(className || '')
-                                const wrapLines = true;
-                                const lineProps = {
-                                    style: { wordBreak: 'break-all', whiteSpace: 'pre-wrap' },
-                                };
-                                return !inline && match ? (
-                                    <SyntaxHighlighter
-                                        children={String(children).replace(/\n$/, '')}
-                                        language={match[1]}
-                                        wrapLines={wrapLines}
-                                        lineProps={lineProps}
-                                        {...props}
-                                    />
-                                ) : (
-                                    <SyntaxHighlighter
-                                        children={children}
-                                        wrapLines={wrapLines}
-                                        lineProps={lineProps}
-                                        {...props}
-                                    />
-                                )
-                            }
-                        }}
-                    />
+                    <ReadNoteMarkdown content={content}/>
 
                     <TagSection tags={tags} />
 
