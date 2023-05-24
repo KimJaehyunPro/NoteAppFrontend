@@ -1,7 +1,6 @@
 import { Outlet } from "react-router-dom";
 import MainAppBar from "./MainAppBar";
 import MainDrawer from "./MainDrawer";
-import LoginDialog from "../../Pages/Authentication/LoginDialog";
 import CssBaseline from '@mui/material/CssBaseline';
 
 import * as React from 'react';
@@ -32,7 +31,6 @@ export default function Layout(props) {
             <Container maxWidth="100%">
                 <Box component="main" padding={5}>
                     <Toolbar />
-                    <LoginDialog />
                     <Outlet />
                 </Box>
             </Container>
